@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Car>
+
+<h3 class="p-2 bg-primary text-white text-center">Машины</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Код</th>
+            <th scope="col">Название</th>
+            <th scope="col">ГосНомер</th>
+            <th scope="col">Владелец</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @if (ViewBag.EditId == null)
+{
+            <form asp-action="AddCar" method="post">
+        @Html.Partial("CarEditor", new Car())
+            </form>
+}
+    <tbody>
+        @foreach(Car c in Model)
+
+        {        
+            @if (c.Id == ViewBag.EditId)
+            {
+                <form asp-action="UpdateCar" method="post">
+                    <input type="hidden" name="Id" value="@c.Id"/>
+                    <div asp-validation-summary="All"></div>
+                    @Html.Partial("CarEditor", c)
+                </form>
+            }
+            {
+                
+            }
+            <tr>
+                <th scope="row">@c.Id</th>
+                <td>@c.Name</td>
+                <td>@c.GovNomber</td>
+                <td>@(c.Customer?.Name == null ? "Нет владельца" : c.Customer?.Name) </td>
+                <td>
+                    <form asp-action="DeleteCar" method="post">
+                        <input type="hidden" name="Id" value="@c.Id" />
+                        <a href="@Url.Action("EditCar", new{id = c.Id})"
+                       class="btn btn-outline-primary">Редактировать</a>
+                        <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

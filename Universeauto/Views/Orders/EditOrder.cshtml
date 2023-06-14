@@ -1,0 +1,103 @@
+﻿@model Order
+
+
+<h3 class="p-2 bg-primary text-white text-center">Создать/Обновить заказ</h3>
+<form asp-controller="Orders"
+      asp-action="AddOrUpdateOrder" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" class="form-control" readonly />
+    </div>
+   
+    <div class="form-group">
+        <label asp-for="DateAdded"></label>
+        <input asp-for="DateAdded" class="form-control" type="date" />
+    </div>
+      
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-control">
+            <option disabled selected>Выберите клиента</option>
+            <option selected>В очереди</option>
+            <option selected>В работе</option>
+            <option selected>Завершён</option>
+        </select>
+    </div>
+      
+    <div class="form-group">
+        <label asp-for="Customer"></label>
+        <select asp-for="CustomerId" class="form-control" id="cust-select">
+            @if(Model.Id == 0)
+            {
+                <option disabled selected>Выберите клиента</option>
+            }
+            @foreach (Customer c in ViewBag.Customers)
+            {
+                <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name @c.Id </option>
+            }
+        </select>
+    </div>
+      
+    <div class="form-group">
+        <label asp-for="Car">Машина</label>
+        <select asp-for="Car" class="form-control">
+            @foreach (Customer cust in ViewBag.Customers)
+            {
+                @*if (cust.Id == resultClickCar)
+                {*@
+                    @foreach (Car car in cust.Cars)
+                    {
+                        <option>@car.Name</option>
+                    }
+                    
+                @*}*@
+                
+            }
+        </select>
+        
+    </div>
+    @*<option selected="@(Model.Customer?.Id == cust.Id)" value="@cust.Id">@cust.Cars</option>*@
+    <div class="form-group">
+        <label asp-for="DateStart"></label>
+        <input asp-for="DateStart" class="form-control" type="date" />
+    </div>
+      
+    <div class="form-group">
+        <label asp-for="DateFinish"></label>
+        <input asp-for="DateFinish" class="form-control" type="date" />
+    </div>
+   
+
+    <h6 class="mt-1 p-2 bg-primaty text-white text-center">Выбранные услуги</h6>
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col font-weight-bold">Услуга</div>
+            <div class=" col font-weight-bold">Категория</div>
+            <div class=" col font-weight-bold">Количество</div>
+        </div>
+        @{
+            int counter = 0;
+        }
+        @foreach (OrderLine line in ViewBag.Lines)
+        {
+            <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
+            <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
+            <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
+            <div class="row my-1">
+                <div class="col">@line.Product.Name</div>
+                <div class="col">@line.Product.Category.Name</div>
+                <div class="col">
+                    <input type="numder" name="lines[@counter].Quantity"
+                       value="@line.Quantity" />
+                </div>
+            </div>
+            counter++;
+        }
+    </div>
+
+    <div class="text-center m-2">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>

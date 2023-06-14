@@ -1,0 +1,37 @@
+﻿@model Car
+
+<div class="row p-2">
+    <div class="col"></div>
+    <div class="col">
+        <input asp-for="Name" class="form-control"/>
+    </div>
+
+    <div class="col">
+        <input asp-for="GovNomber" class="form-control"/>
+    </div>
+    <div class="col">
+       
+       <select class="form-control" asp-for="CustomerId">
+            @if(Model.Id == 0)
+            {
+                <option disabled selected>Выберите владельца</option>
+            }
+            @foreach (Customer c in ViewBag.Customers)
+            {
+                <option selected=@(Model.Customer?.Id == c.Id) 
+                value="@c.Id">@c.Name</option>
+            }
+        </select>
+    </div>
+    <div class="col">
+        @if (Model.Id == 0)
+        {
+            <button type="submit" class="btn btn-primary">Add</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+            <a asp-action="Index" class="btn btn-outline-danger">Cancel</a>
+        }
+    </div>
+</div>

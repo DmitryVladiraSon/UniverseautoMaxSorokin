@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Order>
+
+<h3 class="p-2 bg-primary text-white text-center">Заказы</h3>
+
+<table class="table ">
+    <thead>
+        <tr>
+            <th scope="col">Номер заказа</th>
+            <th scope="col">Дата добавления</th>
+            <th scope="col">Статус</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Машина</th>
+            <th scope="col">Дата начала</th>
+            <th scope="col">Дата завершения</th>
+            <th scope="col">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Order r in Model)
+        {
+            <tr>
+                <th scope="row">@r.Id</th>
+                <td>@r.DateAdded</td>
+                <td>@r.Status</td>
+                <td>@r.Customer.Name</td>
+                <td>@r.Car</td>
+                <td>@r.DateStart</td>
+                <td>@r.DateFinish</td>
+                <td>            
+                    <form asp-action="DeleteOrder" method="post">
+                <input type="hidden" name="Id" value="@r.Id" />
+                <a asp-action="EditOrder" asp-route-id="@r.Id"
+               class="btn btn-outline-primary">Редактировать</a>
+                <button type="submit" class="btn btn-outline-danger">
+                    Удалить
+                </button>
+            </form></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*
+<div class="col">
+    @o.Lines.Sum(l => l.Quantity
+    * l.Product.RetailPrice)
+</div>
+<div class="col">
+    @o.Lines.Sum(l => l.Quantity
+    * (l.Product.RetailPrice - l.Product.PurchasePrice))
+</div>
+*@
+
+<div class="text-center">
+    <a asp-action="EditOrder" class="btn btn-primary">Создать</a>
+</div>

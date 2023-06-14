@@ -1,0 +1,104 @@
+﻿@*@model SportsStore.Models.Order*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SportsStore</title>
+    <link rel="stylesheet" href="~/lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/layoutStyle.css" />
+
+    <style>
+        .placeholder {
+            visibility: collapse;
+            display: none
+        }
+
+            .placeholder:only-child {
+                visibility: visible;
+                display: flex
+            }
+    </style>
+</head>
+<body>
+    <section class="menu">
+        <!-- Логотип -->
+        <a href="#" class="menu__logo logo">
+            Universeauto
+        </a>
+        <!-- Основное меню -->
+        <ul class="menu__list list">
+            <!-- Элемент меню -->
+            <li class="menu__item item">
+                <!-- Ссылка меню -->
+                <a asp-controller="Home" asp-action="Index"
+                   class=" menu__link link @GetClassForButton(" Home")">
+                    <img src="./img/free-icon-menu-561123.png" alt="Starred" />
+                    <span>Услуги</span>
+                </a>
+            </li>
+            <li class="menu__item item">
+                <a asp-controller="Categories" asp-action="Index"
+                   class="menu__link link @GetClassForButton(" Categories")">
+                    <img src="./img/free-icon-customer-support-1086581.png" alt="Starred" />
+                    <span>Категории услуг</span>
+                </a>
+            </li>
+            <li class="menu__item item">
+                <a asp-controller="Customers" asp-action="Index"
+                   class="menu__link link @GetClassForButton("Customers")">
+                    <img src="./img/customer.png" alt="Starred" />
+                    <span>Клиенты</span>
+                </a>
+            </li>
+            <li class="menu__item item">
+                <a asp-controller="Cars" asp-action="Index"
+                   class="menu__link link @GetClassForButton("Cars")">
+                    <img src="./img/sedan.png" alt="Starred" />
+                    <span>Машины</span>
+                </a>
+            </li>
+            <li class="menu__item item">
+                <a asp-controller="Orders" asp-action="Index"
+                   class="menu__link link @GetClassForButton(" Orders")">
+                    <img src="./img/free-icon-note-5885642.png" alt="Starred" />
+                    <span>Заказы</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section class="content">
+        @*<div class="container-fluid">
+        <div class="row p-2">contro
+        <a asp-ller="Home" asp-action="Index"
+        class="@GetClassForButton("Home")">
+        Products
+        </a>
+        <a asp-controller="Categories" asp-action="Index"
+        class="@GetClassForButton("Categories")">
+        Categories
+        </a>
+
+        <a asp-controller="Orders" asp-action="Index"
+        class="@GetClassForButton("Orders")">
+        Orders
+        </a>
+        </div>*@
+        <div class="col">
+            @RenderBody()
+        </div>
+        </div>
+
+    </section>
+
+</body>
+</html>
+
+@functions {
+    string GetClassForButton(string controller)
+    {
+        return "btn btn-block" + (ViewContext.RouteData.Values["controller"]
+        as string == controller ? "btn-primary" : "btn-outline-primary");
+    }
+}
