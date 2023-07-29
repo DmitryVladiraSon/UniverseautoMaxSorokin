@@ -7,7 +7,7 @@
         public Product Product { get; set; }
         public int Quantity { get; set; }
         public decimal? PriceCustomer { get; set; }
-        public string? Employee { get; set; }
+        //public string? Employee { get; set; }
         public decimal? PriceEmployee { get; set; }
         public long OrderId { get; set; }
 

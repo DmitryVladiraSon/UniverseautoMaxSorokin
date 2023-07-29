@@ -2,102 +2,268 @@
 
 
 <h3 class="p-2 bg-primary text-white text-center">Создать/Обновить заказ</h3>
-<form asp-controller="Orders"
-      asp-action="AddOrUpdateOrder" method="post">
-    <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Id"></label>
-        <input asp-for="Id" class="form-control" readonly />
-    </div>
-   
-    <div class="form-group">
-        <label asp-for="DateAdded"></label>
-        <input asp-for="DateAdded" class="form-control" type="date" />
-    </div>
-      
-    <div class="form-group">
-        <label asp-for="Status"></label>
-        <select asp-for="Status" class="form-control">
-            <option disabled selected>Выберите клиента</option>
-            <option selected>В очереди</option>
-            <option selected>В работе</option>
-            <option selected>Завершён</option>
-        </select>
-    </div>
-      
-    <div class="form-group">
-        <label asp-for="Customer"></label>
-        <select asp-for="CustomerId" class="form-control" id="cust-select">
-            @if(Model.Id == 0)
-            {
+<div class="p-2 p-md-2 pt-0 pt-md-0 text-dark">
+    <form asp-controller="Orders"
+          asp-action="AddOrUpdateOrder" method="post">
+
+        <div class="form-group ">
+            <label asp-for="Id">Код заказа</label>
+            <input asp-for="Id" class="form-control" readonly />
+            <span class="text-danger" asp-validation-for="Id"></span>
+        </div>
+
+        <div class="form-group border-1">
+            <label asp-for="DateAdded">Дата добавления</label>
+            <input asp-for="DateAdded" class="form-control" type="date" />
+            <span class="text-danger" asp-validation-for="DateAdded"></span>
+            <hr class="border-top">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Status">Статус заказа</label>
+            <select asp-for="Status" class="form-control">
                 <option disabled selected>Выберите клиента</option>
-            }
-            @foreach (Customer c in ViewBag.Customers)
-            {
-                <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name @c.Id </option>
-            }
-        </select>
-    </div>
-      
-    <div class="form-group">
-        <label asp-for="Car">Машина</label>
-        <select asp-for="Car" class="form-control">
-            @foreach (Customer cust in ViewBag.Customers)
-            {
-                @*if (cust.Id == resultClickCar)
+                <option selected>В очереди</option>
+                <option selected>В работе</option>
+                <option selected>Завершён</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Status"></span>
+            <hr class="border-top">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Customer">Клиент</label>
+            <select asp-for="CustomerId" class="form-control" id="cust-select">
+                @if (Model.Id == 0)
+                {
+                    <option disabled selected>Выберите клиента</option>
+                }
+                @foreach (Customer c in ViewBag.Customers)
+                {
+                    <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name @c.Id </option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="Customer"></span>
+            <hr class="border-top">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Car">Машина</label>
+            <select asp-for="Car" class="form-control">
+                @foreach (Customer cust in ViewBag.Customers)
+                {
+                    @*if (cust.Id == resultClickCar)
                 {*@
                     @foreach (Car car in cust.Cars)
                     {
                         <option>@car.Name</option>
                     }
-                    
-                @*}*@
-                
-            }
-        </select>
-        
-    </div>
-    @*<option selected="@(Model.Customer?.Id == cust.Id)" value="@cust.Id">@cust.Cars</option>*@
-    <div class="form-group">
-        <label asp-for="DateStart"></label>
-        <input asp-for="DateStart" class="form-control" type="date" />
-    </div>
-      
-    <div class="form-group">
-        <label asp-for="DateFinish"></label>
-        <input asp-for="DateFinish" class="form-control" type="date" />
-    </div>
-   
 
-    <h6 class="mt-1 p-2 bg-primaty text-white text-center">Выбранные услуги</h6>
-    <div class="container-fluid">
-        <div class="row">
-            <div class=" col font-weight-bold">Услуга</div>
-            <div class=" col font-weight-bold">Категория</div>
-            <div class=" col font-weight-bold">Количество</div>
+                    @*}*@
+
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="Car"></span>
+            <hr class="border-top">
         </div>
-        @{
-            int counter = 0;
-        }
-        @foreach (OrderLine line in ViewBag.Lines)
-        {
-            <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
-            <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
-            <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
-            <div class="row my-1">
-                <div class="col">@line.Product.Name</div>
-                <div class="col">@line.Product.Category.Name</div>
-                <div class="col">
-                    <input type="numder" name="lines[@counter].Quantity"
-                       value="@line.Quantity" />
-                </div>
-            </div>
-            counter++;
-        }
-    </div>
+        @*<option selected="@(Model.Customer?.Id == cust.Id)" value="@cust.Id">@cust.Cars</option>*@
+        <div class="form-group">
+            <label asp-for="DateStart">Дата начала</label>
+            <input asp-for="DateStart" class="form-control" type="date" />
+            <span class="text-danger" asp-validation-for="DateStart"></span>
+            <hr class="border-top">
+        </div>
 
-    <div class="text-center m-2">
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+        <div class="form-group">
+            <label asp-for="DateFinish">Дата окончания</label>
+            <input asp-for="DateFinish" class="form-control" type="date" />
+            <span class="text-danger" asp-validation-for="DateFinish"></span>
+            <hr class="border-top">
+        </div>
+
+
+        <div>
+            
+            <div class="d-flex flex-column justify-content-center align-items-center">
+
+                <h6 class="mt-1 mb-1 p-2  bg-primary text-white text-center col-12">Выбранные услуги</h6>
+
+             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+                Добавление новой услуги
+            </button>
+            </div>
+        </div>
+
+        
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th class="col-3 font-weight-bold">Услуга</th>
+                    <th class="col-1 font-weight-bold">Количество</th>
+                </tr>
+           </thead>
+            <tbody>
+                @{
+                    int counter = 0;
+                }
+                @foreach (OrderLine line in ViewBag.Lines)
+                {
+                    if (Model.Id == 0)
+                    {
+                        <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
+                        <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
+                        <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
+                       
+                        <tr>
+                            <td class="col-3">@line.Product.Name</td>
+                            <td class="col-1">
+                                <input type="number" class="form-control form-control-sm"
+                                       name="lines[@counter].Quantity" value="@line.Quantity" />
+                            </td>
+                        </tr>
+                    }
+                    else if (line.Quantity > 0)
+                    {
+                        <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
+                        <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
+                        <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
+
+                        <tr>
+                            <td class="col-3">@line.Product.Name</td>
+                            <td class="col-1">
+                                <input type="number" class="form-control form-control-sm"
+                                       name="lines[@counter].Quantity" value="@line.Quantity" />
+                            </td>
+                        </tr>
+
+                    }
+
+                    counter++;
+                }
+
+</tbody>
+        </table>
+
+
+        <div class="text-center m-2">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Заголовок модального окна</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-controller="Orders" asp-action="AddOrderLine" method="post" class="modal-body">
+                <input type="hidden" asp-for="Id"/>
+                <input type="hidden" asp-for="DateAdded"/>
+                <input type="hidden" asp-for="CustomerId"/>
+                <input type="hidden" asp-for="Car"/>
+
+                <input type="hidden" asp-for="Status"/>
+                <input type="hidden" asp-for="DateStart"/>
+                <input type="hidden" asp-for="DateFinish"/>
+                @{
+                    int innerCounter = 0;
+                }
+                @foreach (OrderLine line in ViewBag.Lines)
+                {
+
+                    <input type="hidden" name="lines[@innerCounter].Id" value="@line.Id" />
+                    <input type="hidden" name="lines[@innerCounter].ProductId" value="@line.ProductId" />
+                    <input type="hidden" name="lines[@innerCounter].OrderId" value="@Model.Id" />
+                    <div class="row my-1">
+                        <div class="col">@line.Product.Name</div>
+                        <div class="col">
+                            <input type="number" name="lines[@innerCounter].Quantity"
+                                   value="@line.Quantity" />
+                        </div>
+                    </div>
+
+
+                    innerCounter++;
+                }
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary" >Сохранить</button>
+                </div>
+            </form>
+
+
+        </div>
     </div>
-</form>
+</div>
+
+
+<script>
+    function submitForm() {
+        // Получаем все элементы input с именем "lines[x].Quantity"
+        var quantityInputs = document.querySelectorAll('input[name^="lines["][name$="].Quantity"]');
+
+        // Создаем массив для хранения выбранных элементов OrderLine
+        var selectedLines = [];
+
+        // Проходим по всем элементам и фильтруем только те, у которых Quantity > 0
+        for (var i = 0; i < quantityInputs.length; i++) {
+            var quantity = parseInt(quantityInputs[i].value);
+            if (quantity > 0) {
+                // Находим элемент OrderLine по индексу "x" в имени input
+                var index = quantityInputs[i].name.match(/\[(\d+)\]/)[1];
+                var line = {
+                    Id: document.querySelector('input[name="lines[' + index + '].Id"]').value,
+                    ProductId: document.querySelector('input[name="lines[' + index + '].ProductId"]').value,
+                    OrderId: document.querySelector('input[name="lines[' + index + '].OrderId"]').value,
+                    Quantity: quantity
+                };
+                // Добавляем элемент OrderLine в массив
+                selectedLines.push(line);
+            }
+        }
+
+        // Создаем новую форму и добавляем в нее только выбранные элементы OrderLine
+        var form = document.createElement('form');
+        form.action = '/Orders/AddOrderLine'; // Замените на свой URL
+        form.method = 'POST';
+
+        for (var i = 0; i < selectedLines.length; i++) {
+            var line = selectedLines[i];
+            var idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = 'lines[' + i + '].Id';
+            idInput.value = line.Id;
+            form.appendChild(idInput);
+
+            var productIdInput = document.createElement('input');
+            productIdInput.type = 'hidden';
+            productIdInput.name = 'lines[' + i + '].ProductId';
+            productIdInput.value = line.ProductId;
+            form.appendChild(productIdInput);
+
+            var orderIdInput = document.createElement('input');
+            orderIdInput.type = 'hidden';
+            orderIdInput.name = 'lines[' + i + '].OrderId';
+            orderIdInput.value = line.OrderId;
+            form.appendChild(orderIdInput);
+
+            var quantityInput = document.createElement('input');
+            quantityInput.type = 'hidden';
+            quantityInput.name = 'lines[' + i + '].Quantity';
+            quantityInput.value = line.Quantity;
+            form.appendChild(quantityInput);
+        }
+
+        // Добавляем форму на страницу и отправляем
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>

@@ -52,6 +52,7 @@ namespace Universeauto.Controllers
 
         }
 
+
         [HttpPost]
         public IActionResult AddOrUpdateOrder(Order order)
         {
@@ -78,5 +79,16 @@ namespace Universeauto.Controllers
             ordersRepository.DeleteOrder(order);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public IActionResult AddOrderLine(Order order)
+        {
+            order.Lines = order.Lines
+    .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
+            ordersRepository.UpdateOrder(order);
+
+            return RedirectToAction(nameof(EditOrder),order);
+        }
+
     }
 }

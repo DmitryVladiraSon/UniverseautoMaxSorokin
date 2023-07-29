@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
+using Universeauto.Models.Pages;
 
 namespace Universeauto.Models
 {
@@ -53,6 +55,12 @@ namespace Universeauto.Models
         {
             context.Products.Remove(product);
             context.SaveChanges();
+        }
+
+        public PagedList<Product> GetProducts(QueryOptions options)
+        {
+            return new PagedList<Product>(context.Products
+                .Include(p => p.Category), options);
         }
     }
 }

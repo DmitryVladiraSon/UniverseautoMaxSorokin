@@ -1,9 +1,11 @@
-﻿namespace Universeauto.Models
+﻿using Universeauto.Models.Pages;
+
+namespace Universeauto.Models
 {
     public interface IRepository
     {
         IEnumerable<Product> Products { get; }
-
+        PagedList<Product> GetProducts(QueryOptions options);
         Product GetProduct(long key);
         void AddProduct(Product product);
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Universeauto.Models;
+using Universeauto.Models.Pages;
 
 namespace Universeauto.Controllers
 {
@@ -12,12 +13,12 @@ namespace Universeauto.Controllers
             repository = repo;
             catRepository = catRepo;
         }
-
-        public IActionResult Index()
+        
+        public IActionResult Index(QueryOptions options)
         {
             // System.Console.Clear();
 
-            return View(repository.Products);//as IQueryable<Product>
+            return View(repository.GetProducts(options)); //as IQueryable<Product>
         }
 
         public IActionResult UpdateProduct(long key)

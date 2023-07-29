@@ -29,5 +29,12 @@ namespace Universeauto.Models
             context.Orders.Remove(order);
             context.SaveChanges();
         }
+
+        public void AddOrderLine(Order order) // Скорее всего его нужно сделать асинхронным)
+        {
+            context.Orders.Update(order);
+
+            context.SaveChanges();
+        }
     }
 }

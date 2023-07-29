@@ -1,104 +1,91 @@
-﻿@*@model SportsStore.Models.Order*@
+﻿<!DOCTYPE html>
 
-<!DOCTYPE html>
+	<html lang="en">
+	  <head>
+			<title>SportsStore</title>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>SportsStore</title>
-    <link rel="stylesheet" href="~/lib/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/layoutStyle.css" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <style>
-        .placeholder {
-            visibility: collapse;
-            display: none
-        }
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-            .placeholder:only-child {
-                visibility: visible;
-                display: flex
-            }
-    </style>
-</head>
-<body>
-    <section class="menu">
-        <!-- Логотип -->
-        <a href="#" class="menu__logo logo">
-            Universeauto
-        </a>
-        <!-- Основное меню -->
-        <ul class="menu__list list">
-            <!-- Элемент меню -->
-            <li class="menu__item item">
-                <!-- Ссылка меню -->
-                <a asp-controller="Home" asp-action="Index"
-                   class=" menu__link link @GetClassForButton(" Home")">
-                    <img src="./img/free-icon-menu-561123.png" alt="Starred" />
-                    <span>Услуги</span>
-                </a>
-            </li>
-            <li class="menu__item item">
-                <a asp-controller="Categories" asp-action="Index"
-                   class="menu__link link @GetClassForButton(" Categories")">
-                    <img src="./img/free-icon-customer-support-1086581.png" alt="Starred" />
-                    <span>Категории услуг</span>
-                </a>
-            </li>
-            <li class="menu__item item">
-                <a asp-controller="Customers" asp-action="Index"
-                   class="menu__link link @GetClassForButton("Customers")">
-                    <img src="./img/customer.png" alt="Starred" />
-                    <span>Клиенты</span>
-                </a>
-            </li>
-            <li class="menu__item item">
-                <a asp-controller="Cars" asp-action="Index"
-                   class="menu__link link @GetClassForButton("Cars")">
-                    <img src="./img/sedan.png" alt="Starred" />
-                    <span>Машины</span>
-                </a>
-            </li>
-            <li class="menu__item item">
-                <a asp-controller="Orders" asp-action="Index"
-                   class="menu__link link @GetClassForButton(" Orders")">
-                    <img src="./img/free-icon-note-5885642.png" alt="Starred" />
-                    <span>Заказы</span>
-                </a>
-            </li>
-        </ul>
-    </section>
-    <section class="content">
-        @*<div class="container-fluid">
-        <div class="row p-2">contro
-        <a asp-ller="Home" asp-action="Index"
-        class="@GetClassForButton("Home")">
-        Products
-        </a>
-        <a asp-controller="Categories" asp-action="Index"
-        class="@GetClassForButton("Categories")">
-        Categories
-        </a>
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+			<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+			<link rel="stylesheet" href="/css/sidebar.css">
+	  </head>
+	  <body>
+		
+			<div class="wrapper d-flex align-items-stretch">
+				<nav id="sidebar">
+					<div class="custom-menu">
+						<button type="button" id="sidebarCollapse" class="btn btn-primary">
+				  <i class="fa fa-bars"></i>
+				  <span class="sr-only">Toggle Menu</span>
+				</button>
+			</div>
+					<div class="p-4">
+		  			<h1><a href="index.html" class="logo">Universauto <span>Детейлинг авто</span></a></h1>
+				<ul class="list-unstyled components mb-5">
+@*				  <li class="active">
+					<a asp-controller="Main" asp-action="Index"><span class="fa fa-home mr-3"></span> Главная</a>
+				  </li>*@
+@*				  <li>
+						<a asp-controller="Profile" asp-action="Index"><span class="fa fa-user mr-3"></span> Профиль</a>
+				  </li>*@
+				  <li>
+						<a asp-controller="Home" asp-action="Index"><span class="fa fa-briefcase mr-3"></span> Услуги</a>
+				  </li>
+				  <li>
+						<a asp-controller="Categories" asp-action="Index"><span class="fa fa-sticky-note mr-3"></span> Категории</a>
+				  </li>
+				  <li>
+						<a asp-controller ="Customers" asp-action="Index"><span class="fa fa-suitcase mr-3"></span> Клиенты</a>
+				  </li>
+				  <li>
+						<a asp-controller="Cars" asp-action="Index"><span class="fa fa-cogs mr-3"></span> Машины</a>
+				  </li>
+				  <li>
+						<a asp-controller="Orders" asp-action="Index"><span class="fa fa-paper-plane mr-3"></span> Заказы</a>
+				  </li>
+				</ul>
 
-        <a asp-controller="Orders" asp-action="Index"
-        class="@GetClassForButton("Orders")">
-        Orders
-        </a>
-        </div>*@
-        <div class="col">
-            @RenderBody()
-        </div>
-        </div>
+@*				<div class="mb-5">
+							<h3 class="h6 mb-3">Subscribe for newsletter</h3>
+							<form action="#" class="subscribe-form">
+					<div class="form-group d-flex">
+	            		<div class="icon"><span class="icon-paper-plane"></span></div>
+					  <input type="text" class="form-control" placeholder="Enter Email Address">
+					</div>
+				  </form>
+						</div>*@
 
-    </section>
+				<div class="footer">
+	        		
+							  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Все права защищены|</p>
+				</div>
 
-</body>
-</html>
+			  </div>
+    		</nav>
 
-@functions {
-    string GetClassForButton(string controller)
-    {
-        return "btn btn-block" + (ViewContext.RouteData.Values["controller"]
-        as string == controller ? "btn-primary" : "btn-outline-primary");
-    }
-}
+			<!-- Page Content  -->
+		<div id="content" class="">
+	  @RenderBody()  
+		</div>
+			</div>
+
+		<script src="/lib/jquery/dist/jquery.min.js"></script>
+
+		<script src="/js/popper.js"></script>
+		<script src="/lib/js/bootstrap.min.js"></script>
+		<script src="/js/main.js"></script>
+
+	  </body>
+	</html>
+
+	@functions {
+		string GetClassForButton(string controller)
+		{
+			return "btn btn-block" + (ViewContext.RouteData.Values["controller"]
+			as string == controller ? "btn-primary" : "btn-outline-primary");
+		}
+	}

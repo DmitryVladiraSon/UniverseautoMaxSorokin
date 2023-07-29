@@ -1,41 +1,50 @@
 ﻿@model IEnumerable<Product>
 
 <h3 class="p-2 bg-primary text-white text-center">Услуги</h3>
+<div class="text-center">
+    @Html.Partial("Pages",Model)
+</div>
+<div class="table-responsive">
+<table class="table table-hover overflow-auto">
+    <thead>
+        <tr>
+        <th class="col-1 font-weight-bold">#</th>
+        <th class="col font-weight-bold">Название</th>
+        <th class="col font-weight-bold">Категория</th>
+        <th class="col font-weight-bold text-right">Цена</th>
+        <th class="col font-weight-bold text-right">Цена с моржой</th>
+        <th class="col "></th>
+        <th class="col "></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product p in Model)
+        {
+            <tr>
+                <th class="col-1">@p.Id</th>
+                <td class="col">@p.Name</td>
+                <td class="col">@p.Category.Name</td>
+                <td class="col text-right">@p.PurchasePrice</td>
+                <td class="col text-right">@p.RetailPrice</td>
+           
 
-<div class="container-fluid mt-3">
+                <form asp-action="Delete" metdod="post">
+                    <td class="col fs-6">
+                    <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-outline-primary ">Редакт</a>
+                        <input type="hidden" name="Id" value="@p.Id" />
+                </td>
 
-    <div class="row">
-        <div class="col-1 font-weight-bold">Id</div>
-        <div class="col font-weight-bold">Название</div>
-        <div class="col font-weight-bold">Категория</div>
-        <div class="col font-weight-bold text-right">Цена</div>
-        <div class="col font-weight-bold text-right">Цена с моржой</div>
-        <div class="col "></div>
-    </div>
+                <td class="col fs-6">
 
-    @foreach (Product p in Model)
-    {
-        <div class="row p-2">
-            <div class="col-1">@p.Id</div>
-            <div class="col">@p.Name</div>
-            <div class="col">@p.Category.Name</div>
-            <div class="col text-right">@p.PurchasePrice</div>
-            <div class="col text-right">@p.RetailPrice</div>
-@*            <div class="col"></div>*@
-
-            <form asp-action="Delete" method="post">
-                <div class="col">
-                    <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-outline-primary">Редактировать</a>
-                    <input type="hidden" name="Id" value="@p.Id" />
-                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
-                </div>
-            </form>
-        </div>
-
-    }
-    <div class="text-center p-2">
-        <a asp-action="UpdateProduct" asp-route-key="0"
-           class="btn btn-primary">Добавить</a>
-    </div>
-
+                    <button type="submit" class="btn btn-outline-danger ">Удал</button>
+                    </td>
+                </form>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<div class="text-center p-2">
+    <a asp-action="UpdateProduct" asp-route-key="0"
+       class="btn btn-primary">Добавить</a>
 </div>
