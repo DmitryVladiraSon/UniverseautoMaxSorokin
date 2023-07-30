@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Product>
 
-<h3 class="p-2 bg-primary text-white text-center">Услуги</h3>
 <div class="text-center">
     @Html.Partial("Pages",Model)
 </div>
@@ -30,13 +29,17 @@
 
                 <form asp-action="Delete" metdod="post">
                     <td class="col fs-6">
-                    <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-outline-primary ">Редакт</a>
+                        <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-outline-primary ">
+                            <i class="fa fa-pencil"></i>
+                        </a>
                         <input type="hidden" name="Id" value="@p.Id" />
                 </td>
 
                 <td class="col fs-6">
 
-                    <button type="submit" class="btn btn-outline-danger ">Удал</button>
+                        <button type="submit" class="btn btn-outline-danger ">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </form>
             </tr>

@@ -29,9 +29,9 @@
 @*				  <li class="active">
 					<a asp-controller="Main" asp-action="Index"><span class="fa fa-home mr-3"></span> Главная</a>
 				  </li>*@
-@*				  <li>
+				  <li>
 						<a asp-controller="Profile" asp-action="Index"><span class="fa fa-user mr-3"></span> Профиль</a>
-				  </li>*@
+				  </li>
 				  <li>
 						<a asp-controller="Home" asp-action="Index"><span class="fa fa-briefcase mr-3"></span> Услуги</a>
 				  </li>
@@ -68,8 +68,13 @@
     		</nav>
 
 			<!-- Page Content  -->
-		<div id="content" class="">
-	  @RenderBody()  
+		<div id="content" >
+			<h3 class="p-2 bg-primary text-white text-center"> @ViewBag.TitlePage</h3>
+
+			<div class="mr-2 ml-2">
+				@RenderBody()
+
+			</div>
 		</div>
 			</div>
 

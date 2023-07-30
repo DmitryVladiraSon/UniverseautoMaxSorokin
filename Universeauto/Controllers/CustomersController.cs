@@ -18,7 +18,7 @@ namespace Universeauto.Controllers
 
         public IActionResult Index()
         {
-
+            ViewBag.TitlePage = "Клиенты";
             return View(custRepository.Customers);
         }
 
@@ -54,6 +54,8 @@ namespace Universeauto.Controllers
 
         public IActionResult EditCustomer(long id)
         {
+            ViewBag.TitlePage = "Клиент";
+
             if (ModelState.IsValid)
             {
                 var cars = carRepository.Cars;

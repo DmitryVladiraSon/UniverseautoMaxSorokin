@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Customer>
 
-<h3 class="p-2 bg-primary text-white text-center">Customers</h3>
 
 <div class="table-responsive">
 
@@ -29,7 +28,7 @@
                 <tr>
                     <th scope="row">@c.Id</th>
                     <td  >@c.Name</td>
-                    <td  >@c.Phone</td>
+                    <td  >+7 @c.Phone</td>
                     <td  >@foreach(var car in c.Cars)
                         { <p>@car.Name -  @car.GovNomber</p> }</td>
                     <td>
@@ -41,7 +40,8 @@
                                 Edit
                             </a>
                             <button type="submit" class="btn btn-outline-danger">
-                                Delete
+                                    <i class="fa fa-trash"></i>
+
                             </button>
                         </form>
                     </td>

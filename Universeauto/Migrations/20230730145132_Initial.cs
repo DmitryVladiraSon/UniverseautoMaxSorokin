@@ -52,9 +52,10 @@ namespace Universeauto.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false),
-                    CategoryId = table.Column<long>(type: "bigint", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true),
                     PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RetailPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    RetailPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CategoryId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,9 +124,8 @@ namespace Universeauto.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ProductId = table.Column<long>(type: "bigint", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    PriceCustomer = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Employee = table.Column<string>(type: "longtext", nullable: false),
-                    PriceEmployee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PriceCustomer = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PriceEmployee = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     OrderId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>

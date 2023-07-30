@@ -3,23 +3,30 @@
     var CustomerCars = ViewData["Cars"] as List<Car>;
 }
 
-<h3 class="p-2 text-center text-white bg-primary">Клиент</h3>
 <form asp-action="AddOrUpdateCustomer">
     <div class="form-group">
-        <label asp-for="Id"></label>
+        <label asp-for="Id">#</label>
         <input asp-for="Id" class="form-control" readonly />
     </div>
     <div class="form-group">
-        <label asp-for="Name"></label>
+        <label asp-for="Name">ФИО</label>
         <input asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" />
+        <label asp-for="Phone">Номер телефона</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">+7</span>
+            </div>
+            <input type="tel" asp-for="Phone" class="form-control" placeholder="Введите номер телефона" oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10)" maxlength="10">
+        </div>
+        <small class="form-text text-muted">Введите номер телефона без кода страны и разделителей (10 цифр)</small>
     </div>
+
+
     <div class="form-group">
         <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
+        <input type="email" asp-for="Email" class="form-control" />
     </div>
 
     <h6 class="mt-1 p-2 bg-primary text-white text-center">Машины клиента</h6>
@@ -32,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            @if (ViewBag.Cars == null)
+            @if (ViewBag.Cars == null || ViewBag.Cars.Count == 0)
             {
                 <tr>
                     <td>

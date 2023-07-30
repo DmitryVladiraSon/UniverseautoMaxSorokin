@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<Category>
 
-<h3 class="p-2 bg-primary text-white text-center">Категории услуг</h3>
 <div class="container-fluid mt-3">
 <div class="row">
-    <div class="col-1 font-weight-bold">Id</div>
+    <div class="col-1 font-weight-bold">#</div>
     <div class="col font-weight-bold">Название</div>
     <div class="col font-weight-bold">Описание</div>
     <div class="col-3"></div>
@@ -34,9 +33,12 @@
             <form asp-action="DeleteCategory" method="post">
                 <input type="hidden" name="Id" value="@c.Id" />
                         <a href="@Url.Action("EditCategory", new { id = c.Id })"
-                 class="btn btn-outline-primary">Редактировать</a>
+                           class="btn btn-outline-primary">
+                            <i class="fa fa-pencil"></i>
+                        </a>
                 <button type="submit" class="btn btn-outline-danger">
-                    Удалить
+                            <i class="fa fa-trash"></i>
+
                 </button>
             </form>
         </div>

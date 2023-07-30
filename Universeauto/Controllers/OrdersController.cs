@@ -26,7 +26,8 @@ namespace Universeauto.Controllers
 
         public IActionResult Index()
         {
-            var orders = ordersRepository.Orders;
+			ViewBag.TitlePage = "Заказы";
+			var orders = ordersRepository.Orders;
             return View(ordersRepository.Orders);
         }// => View(ordersRepository.Orders);
 

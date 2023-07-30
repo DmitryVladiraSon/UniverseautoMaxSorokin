@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<Car>
 
-<h3 class="p-2 bg-primary text-white text-center">Машины</h3>
 <div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Код</th>
+            <th scope="col">#</th>
             <th scope="col">Название</th>
             <th scope="col">ГосНомер</th>
             <th scope="col">Владелец</th>
@@ -30,9 +29,6 @@
                     @Html.Partial("CarEditor", c)
                 </form>
             }
-            {
-                
-            }
             <tr>
                 <th scope="row">@c.Id</th>
                 <td>@c.Name</td>
@@ -42,8 +38,12 @@
                     <form asp-action="DeleteCar" method="post">
                         <input type="hidden" name="Id" value="@c.Id" />
                         <a href="@Url.Action("EditCar", new{id = c.Id})"
-                       class="btn btn-outline-primary">Редактировать</a>
-                        <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                               class="btn btn-outline-primary">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <button type="submit" class="btn btn-outline-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
                     </form>
                 </td>
             </tr>

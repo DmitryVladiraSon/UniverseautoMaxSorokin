@@ -12,6 +12,8 @@ namespace Universeauto.Models
         [Required(ErrorMessage ="Введите гос. номер")]
         public string GovNomber { get; set; }
 
+        public string ClassAuto { get; set; }
+
         public long? CustomerId { get; set; }
         public Customer? Customer { get; set; }
     }

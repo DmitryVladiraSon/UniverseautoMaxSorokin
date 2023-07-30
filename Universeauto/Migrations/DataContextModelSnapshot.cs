@@ -130,17 +130,13 @@ namespace Universeauto.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Employee")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal>("PriceCustomer")
+                    b.Property<decimal?>("PriceCustomer")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("PriceEmployee")
+                    b.Property<decimal?>("PriceEmployee")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("ProductId")
@@ -164,8 +160,12 @@ namespace Universeauto.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long>("CategoryId")
+                    b.Property<long?>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -226,12 +226,17 @@ namespace Universeauto.Migrations
             modelBuilder.Entity("Universeauto.Models.Product", b =>
                 {
                     b.HasOne("Universeauto.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Universeauto.Models.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Universeauto.Models.Customer", b =>

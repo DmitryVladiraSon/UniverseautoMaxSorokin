@@ -12,13 +12,13 @@
     <div class="col-3">
         @if (Model.Id == 0)
         {
-                <button type="submit" class="btn btn-primary">Добавить</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
         }
         else
         {
 
-                <button type="submit" class="btn btn-outline-primary">Сохранить</button>
-                <a asp-action="Index" class="btn btn-outline-secondary">Отменить</a>
+            <button type="submit" class="btn btn-outline-primary"><i class="fa fa-save"></i></button>
+            <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa fa-times"></i></a>
         }
     </div>
 </div>
