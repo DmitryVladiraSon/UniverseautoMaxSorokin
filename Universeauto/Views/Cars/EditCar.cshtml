@@ -1,4 +1,32 @@
-﻿@page
-@model Universeauto.Views.Cars.EditCarModel
-@{
-}
+﻿@model Car
+
+<form asp-controller="Car" asp-action="EditCar" method="post">
+    <div>
+        <label asp-for="Id">#</label>
+        <input asp-for="Id" readonly/>
+    </div>
+    <div>
+        <label asp-for="Name">Название авто</label>
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="GovNomber"></label>
+        <input asp-for="GovNomber"/>
+        <span asp-validation-for="GovNomber"></span>
+    </div>
+    <div>
+        <label asp-for="ClassAuto"></label>
+        <input asp-for="ClassAuto"/>
+        <span asp-validation-for="ClassAuto"></span>
+    </div>
+    <div>
+        <label asp-for="Customer"></label>
+        <input asp-for="Customer"/>
+        <span asp-validation-for="Customer"></span>
+    </div>
+    <div>
+        <button class="btn btn-primary"><i class="fa fa-plus"></i></button>
+        <a asp-action="Index" class="btn btn-primary"><i class="fa fa-times"></i></a>
+    </div>
+</form>
