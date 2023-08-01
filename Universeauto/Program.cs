@@ -14,6 +14,7 @@ builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
 builder.Services.AddTransient<ICarRepository, CarRepository>();
+builder.Services.AddTransient<IOrderLinesRepository, OrderLinesRepository>();
 //builder.Services.AddScoped<IRepository, DataRepository>(); Вот из-за этой строчки ничего Не работало!! ГЫ)
 
 //var connectionString = Configuration.GetConnectionString("DefaultConnection");

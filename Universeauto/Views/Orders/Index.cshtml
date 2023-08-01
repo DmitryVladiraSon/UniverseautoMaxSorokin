@@ -19,6 +19,7 @@
                             <th scope="col">Машина</th>
                             <th scope="col">Дата начала</th>
                             <th scope="col">Дата завершения</th>
+                            <th scope="col">Цена</th>
                             <th scope="col">Действия</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                 <td>@r.Car</td>
                                 <td>@r.DateStart</td>
                                 <td>@r.DateFinish</td>
+                                <td>@r.CustomerPrice</td>
                                 <td>
                                     <form asp-action="DeleteOrder" method="post">
                                         <input type="hidden" name="Id" value="@r.Id" />

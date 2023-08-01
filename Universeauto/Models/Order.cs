@@ -14,7 +14,6 @@ namespace Universeauto.Models
 
         [Required(ErrorMessage = "Укажите клиента для заказа")]
         public long CustomerId { get; set; }
-     
         public Customer? Customer { get; set; }
 
         [Required(ErrorMessage ="Укажите машину для заказа")]
@@ -28,6 +27,7 @@ namespace Universeauto.Models
 
         [Required(ErrorMessage = "Укажите финальную цену")]
         public decimal CustomerPrice { get; set; }
+        public decimal SalonPrice { get; set; }
         [Required(ErrorMessage = "Укажите хотя бы одну строку заказа")]
 
         public IEnumerable<OrderLine> Lines { get; set; }

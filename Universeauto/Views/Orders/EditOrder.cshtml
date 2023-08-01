@@ -1,7 +1,6 @@
 ﻿@model Order
 
 
-<h3 class="p-2 bg-primary text-white text-center"></h3>
 <div class="p-2 p-md-2 pt-0 pt-md-0 text-dark">
     <form asp-controller="Orders"
           asp-action="AddOrUpdateOrder" method="post">
@@ -100,9 +99,10 @@
                 <tr>
                     <th class="col-3 font-weight-bold">Услуга</th>
                     <th class="col-1 font-weight-bold">Количество</th>
+                    <th class="col-1 font-weight-bold">Цена</th>
                 </tr>
            </thead>
-            <tbody>
+            <tbody id="tbody">
                 @{
                     int counter = 0;
                 }
@@ -116,6 +116,7 @@
                        
                         <tr>
                             <td class="col-3">@line.Product.Name</td>
+                            <td class="col-3">@line.Product.RetailPrice</td>
                             <td class="col-1">
                                 <input type="number" class="form-control form-control-sm"
                                        name="lines[@counter].Quantity" value="@line.Quantity" />
@@ -130,6 +131,7 @@
 
                         <tr>
                             <td class="col-3">@line.Product.Name</td>
+                            <td class="col-3">@line.Product.RetailPrice</td>    
                             <td class="col-1">
                                 <input type="number" class="form-control form-control-sm"
                                        name="lines[@counter].Quantity" value="@line.Quantity" />
@@ -142,7 +144,19 @@
                 }
 
 </tbody>
+            <tfoot>
+                <tr>
+                    <th class="text-right" colspan="2">Общая стоимость:</th>
+                    <td class="col-1">
+                        <input asp-for="CustomerPrice" class="form-control" /> <!-- Этот элемент будет показывать общую стоимость -->
+                        <span id="totalPrice">0</span> <!-- Этот элемент будет показывать общую стоимость -->
+                    </td>
+                </tr>
+            </tfoot>
         </table>
+
+        
+
 
 
         <div class="text-center m-2">
@@ -266,4 +280,73 @@
         document.body.appendChild(form);
         form.submit();
     }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Получаем ссылку на элемент tbody
+        const tbody = document.getElementById("tbody");
+
+        // Получаем все элементы <input> с именем "Quantity" внутри tbody
+        const quantityInputs = tbody.querySelectorAll("input[name^='lines['][name$='].Quantity']");
+
+        // Функция для вычисления общей стоимости
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+            quantityInputs.forEach(input => {
+                const quantity = parseInt(input.value, 10); // Получаем значение количества услуг
+                const price = parseFloat(input.closest("tr").querySelector(".col-3:nth-child(2)").textContent); // Получаем стоимость услуги из соседнего элемента
+
+                if (!isNaN(quantity) && !isNaN(price)) {
+                    totalPrice += quantity * price;
+                }
+            });
+
+            // Устанавливаем значение общей стоимости в модели (предполагается, что у вас есть свойство SalonPrice в модели)
+            document.getElementById("CustomerPrice").value = totalPrice.toFixed(2);
+        }
+
+        // Обработчик события изменения для каждого поля ввода количества услуг
+        quantityInputs.forEach(input => {
+            input.addEventListener("change", calculateTotalPrice);
+        });
+
+        // Вызываем функцию для начального вычисления общей стоимости
+        calculateTotalPrice();
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Получаем ссылку на элемент tbody
+        const tbody = document.getElementById("tbody");
+
+        // Получаем все элементы <input> с именем "Quantity" внутри tbody
+        const quantityInputs = tbody.querySelectorAll("input[name^='lines['][name$='].Quantity']");
+
+        // Функция для вычисления общей стоимости
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+            quantityInputs.forEach(input => {
+                const quantity = parseInt(input.value, 10); // Получаем значение количества услуг
+                const price = parseFloat(input.closest("tr").querySelector(".col-3:nth-child(2)").textContent); // Получаем стоимость услуги из соседнего элемента
+
+                if (!isNaN(quantity) && !isNaN(price)) {
+                    totalPrice += quantity * price;
+                }
+            });
+
+            // Обновляем текст в элементе, показывающем общую стоимость
+            document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);
+        }
+
+        // Обработчик события изменения для каждого поля ввода количества услуг
+        quantityInputs.forEach(input => {
+            input.addEventListener("change", calculateTotalPrice);
+        });
+
+        // Вызываем функцию для начального вычисления общей стоимости
+        calculateTotalPrice();
+    });
 </script>
