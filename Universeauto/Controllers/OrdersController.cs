@@ -57,7 +57,7 @@ namespace Universeauto.Controllers
         [HttpPost]
         public IActionResult AddOrUpdateOrder(Order order)
         {
-
+            ViewBag.TitlePage = "Создать/Обновить заказ";
                 order.Lines = order.Lines
     .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
                 if (order.Id == 0)

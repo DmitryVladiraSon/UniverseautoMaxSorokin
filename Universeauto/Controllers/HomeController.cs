@@ -24,6 +24,7 @@ namespace Universeauto.Controllers
         public IActionResult UpdateProduct(long key)
         {
             ViewBag.Categories = catRepository.Categories;
+            ViewBag.TitlePage = "Обновить услугу";
             return View(key == 0 ? new Product() : repository.GetProduct(key));
         }
 

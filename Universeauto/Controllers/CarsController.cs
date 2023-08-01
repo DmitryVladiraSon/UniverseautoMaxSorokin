@@ -36,16 +36,52 @@ namespace Universeauto.Controllers
 
 		}
 
-		public IActionResult EditCar(long id)
+        [HttpPost]
+        public IActionResult AddOrUpdateCar(Car car)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (car.Id == 0)
+                {
+                    carRepository.AddCar(car);
+                }
+                else
+                {
+                    carRepository.UpdateCar(car);
+                }
+                return RedirectToAction(nameof(Index));
+
+			}
+			else
+			{
+                return RedirectToAction(nameof(EditCar),car);
+
+            }
+        }
+
+
+        public IActionResult EditCar(Car car)
 		{
-			ViewBag.EditId = id;
+			ViewBag.EditId = car.Id;
 			ViewBag.Customers = customerRepository.Customers;
             ViewBag.TitlePage = "Редактировать машину";
 
-            return View("Index", carRepository.Cars);
-		}
+            if (ModelState.IsValid)
+            {
+                return View(car);
 
-		[HttpPost]
+
+            }
+            else
+			{  
+				
+                return View(car);
+            }
+
+        }
+
+        [HttpPost]
 		public IActionResult UpdateCar(Car car)
 		{
 			if (ModelState.IsValid)

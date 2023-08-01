@@ -17,19 +17,8 @@
         <input asp-for="GovNomber" class="form-control"/>
     </div>
     <div class="col">
-            <label asp-for="Customer">Владелец</label>
 
-            <select class="form-control" asp-for="CustomerId">
-            @if(Model.Id == 0)
-            {
-                <option disabled selected>Выберите владельца</option>
-            }
-            @foreach (Customer c in ViewBag.Customers)
-            {
-                <option selected=@(Model.Customer?.Id == c.Id) 
-                value="@c.Id">@c.Name</option>
-            }
-        </select>
+
     </div>
     <div class="col">
         @if (Model.Id == 0)
@@ -44,3 +33,5 @@
     </div>
 </div>
 </div>
+
+

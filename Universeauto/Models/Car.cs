@@ -17,4 +17,6 @@ namespace Universeauto.Models
         public long? CustomerId { get; set; }
         public Customer? Customer { get; set; }
     }
+
+
 }

@@ -30,7 +30,7 @@ namespace Universeauto.Models
             context.SaveChanges();
         }
 
-        public Car GetCar(int id) => context.Cars
+        public Car GetCar(long id) => context.Cars
             .Include(c => c.Customer).First(car => car.Id == id);
     }
 }

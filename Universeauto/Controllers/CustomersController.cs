@@ -42,7 +42,7 @@ namespace Universeauto.Controllers
                     custRepository.UpdateCustomer(customer);
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(EditCustomer),customer);
         }
 
         //[HttpPost]
@@ -52,7 +52,7 @@ namespace Universeauto.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        public IActionResult EditCustomer(long id)
+        public IActionResult EditCustomer(Customer customer)
         {
             ViewBag.TitlePage = "Клиент";
 
@@ -60,7 +60,7 @@ namespace Universeauto.Controllers
             {
                 var cars = carRepository.Cars;
 
-                Customer customer = id == 0 ? new Customer() : custRepository.GetCustomer(id);
+               // customer = id == 0 ? new Customer() : custRepository.GetCustomer(id);
 
                 //IDictionary<long?, List<Car>> customerCars
                 //    = customer.Cars?.ToDictionary(car => car.CustomerId)
@@ -88,7 +88,7 @@ namespace Universeauto.Controllers
                 {
                     foreach (Car car in listCars)
                     {
-                        if (car.CustomerId == id)
+                        if (car.CustomerId == customer.Id)
                         {
                             CustomerCars.Add(car);
 
@@ -105,12 +105,11 @@ namespace Universeauto.Controllers
             }
             else
             {
-                Customer customer = id == 0 ? new Customer() : custRepository.GetCustomer(id);
+                //Customer customer = id == 0 ? new Customer() : custRepository.GetCustomer(id);
                 return View(customer);
             }
 
 
-            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult UpdateCustomer(long key)
