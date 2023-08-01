@@ -67,17 +67,21 @@ namespace Universeauto.Controllers
 			ViewBag.Customers = customerRepository.Customers;
             ViewBag.TitlePage = "Редактировать машину";
 
-            if (ModelState.IsValid)
-            {
-                return View(car);
+            ViewBag.AutoClasses = new List<AutoClass>
+    {
+        new AutoClass("C-Класс"),
+        new AutoClass("E-Класс"),
+        new AutoClass("SUV, S-Класс"),
+        new AutoClass("Внедорожник")
+    };
 
+           if(car.Id != 0)
+			{
+                car = carRepository.GetCar(car.Id);
 
             }
-            else
-			{  
-				
-                return View(car);
-            }
+            return View(car);
+            
 
         }
 

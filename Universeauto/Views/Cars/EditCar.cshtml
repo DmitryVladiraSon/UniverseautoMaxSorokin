@@ -32,7 +32,19 @@
 
     <div class="form-group">
         <label asp-for="ClassAuto">Класс Авто</label>
-        <input asp-for="ClassAuto" class="form-control" />
+        <select asp-for="ClassAuto" class="form-control">
+            @if (Model.Id == 0)
+            {
+                <option disabled selected>Выберите машину</option>
+            }
+
+            @foreach (var cl in (List<AutoClass>)ViewBag.AutoClasses)
+            {
+                <option>@cl.Name</option>
+
+            }
+
+        </select>
         <span asp-validation-for="ClassAuto" class="text-danger"></span>
         <hr class="border-top">
 
@@ -41,7 +53,7 @@
         <label asp-for="Customer">Владелец</label>
 
         <select class="form-control" asp-for="CustomerId">
-            @if (Model.Id == 0)
+            @if (Model.Id == 0 || Model.Customer == null)
             {
                 <option disabled selected>Выберите владельца</option>
             }

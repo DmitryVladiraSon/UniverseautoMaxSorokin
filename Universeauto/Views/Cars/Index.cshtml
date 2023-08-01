@@ -7,6 +7,7 @@
             <th scope="col">#</th>
             <th scope="col">Название</th>
             <th scope="col">ГосНомер</th>
+            <th scope="col">Класс авто</th>
             <th scope="col">Владелец</th>
             <th scope="col"></th>
         </tr>
@@ -33,6 +34,7 @@
                 <th scope="row">@c.Id</th>
                 <td>@c.Name</td>
                 <td>@c.GovNomber</td>
+                <td>@c.ClassAuto</td>
                 <td>@(c.Customer?.Name == null ? "Нет владельца" : c.Customer?.Name) </td>
                 <td>
                     <form asp-action="DeleteCar" method="post">
