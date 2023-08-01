@@ -11,7 +11,8 @@ namespace Universeauto.Models
         public OrdersRepository(DataContext cxt) => context = cxt;
         public IEnumerable<Order> Orders => context.Orders.Include(o => o.Customer)
     .Include(o => o.Lines).ThenInclude(l => l.Product).ToArray();
-        public Order GerOrder(long key) => context.Orders
+        public Order GetOrder(long key) => context.Orders
+            .Include(o => o.Customer)
             .Include(o => o.Lines).First(o => o.Id == key);
 
         public void AddOrder(Order order)

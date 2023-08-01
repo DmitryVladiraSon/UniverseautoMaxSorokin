@@ -8,6 +8,7 @@
             <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
                 <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
             </button>
+
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -41,6 +42,8 @@
                                         <input type="hidden" name="Id" value="@r.Id" />
                                         <a asp-action="EditOrder" asp-route-id="@r.Id"
                                            class="btn btn-outline-primary"><i class="fa fa-pencil"></i></a>
+                                        <a asp-controller="Reports" asp-action="ExportReportOrder" asp-route-id="@r.Id"
+                                           class="btn btn-outline-primary">Отчет</a>
                                         <button type="submit" class="btn btn-outline-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>
@@ -59,4 +62,6 @@
 
 <div class="text-center">
     <a asp-action="EditOrder" class="btn btn-primary">Создать</a>
+    <a asp-controller="Reports" asp-action="ExportOrdersReport"
+       class="btn btn-outline-primary">Общий отчет</a>
 </div>

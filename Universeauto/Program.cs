@@ -1,5 +1,6 @@
 using Universeauto.Models;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,9 @@ builder.Services.AddDbContext<DataContext>(options => options.UseMySQL(connectio
 
 
 var app = builder.Build();
+
+// Установка лицензионного контекста для EPPlus
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 //app.MapGet("/", () => "Hello World!");        ?????
 

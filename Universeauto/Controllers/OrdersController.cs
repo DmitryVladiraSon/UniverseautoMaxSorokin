@@ -40,7 +40,7 @@ namespace Universeauto.Controllers
         {
             ViewBag.TitlePage = "Заказ";
 
-            Order order1 = order.Id == 0 ? new Order() : ordersRepository.GerOrder(order.Id);
+            Order order1 = order.Id == 0 ? new Order() : ordersRepository.GetOrder(order.Id);
 
 
             ViewBag.Customers = customerRepository.Customers;
@@ -68,8 +68,7 @@ namespace Universeauto.Controllers
 .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
 
 
-            var customerPrice = orderLinesRepository.GetOrderLines()
-                .Where(l => l.OrderId == order.Id)
+            var customerPrice = orderLinesRepository.GetOrderLinesByOrder(order)
                 .Join(productRepository.Products,
                     line => line.ProductId,
                     product => product.Id,
