@@ -16,8 +16,9 @@ namespace Universeauto.Controllers
         
         public IActionResult Index(QueryOptions options)
         {
-            // System.Console.Clear();
+           
             ViewBag.TitlePage = "Услуги";
+            ViewBag.Options = options;
             return View(repository.GetProducts(options)); //as IQueryable<Product>
         }
 
