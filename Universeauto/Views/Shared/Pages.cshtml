@@ -8,7 +8,7 @@
 
 
     @*Страницы до 3*@
-    @for (int i = 1; i <= 3 && i <= Model.TotalPages; i++)
+    @for (int i = 1; i <= 2 && i <= Model.TotalPages; i++)
     {
         <button name="options.currentPage" value="@i" type="submit"
                 class="btn btn-outline-primary
@@ -17,14 +17,14 @@
         </button>
     }
 
-    @if (Model.CurrentPage > 3 && Model.TotalPages - Model.CurrentPage >= 3)
+    @if (Model.CurrentPage > 2 && Model.TotalPages - Model.CurrentPage >= 2)
     {
         @:...
         <button class="btn btn-outline-primary active" name="options.currentPage" value="@Model.CurrentPage" type="submit">
             @Model.CurrentPage
         </button>
     }
-    @if (Model.TotalPages > 3)
+    @if (Model.TotalPages > 2)
     {
         @:...
         @for (int i = Math.Max(4, Model.TotalPages - 2);
