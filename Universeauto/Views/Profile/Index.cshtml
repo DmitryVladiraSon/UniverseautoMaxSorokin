@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Product>
 
-
+<div class="text-center">
+    @Html.Partial("Pages",Model);
+</div>
 <form method="post">
     <div>
         <label>Number</label>
