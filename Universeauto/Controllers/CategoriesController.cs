@@ -33,7 +33,7 @@ namespace Universeauto.Controllers
 		public IActionResult EditCategory(long id)
 		{
 			ViewBag.EditId = id;
-            ViewBag.TitlePage = "Редактирование категории";
+            ViewBag.TitlePage = "Редактирование";
 
             return View("Index", repository.Categories);
 		}
@@ -41,8 +41,15 @@ namespace Universeauto.Controllers
 		[HttpPost]
 		public IActionResult UpdateCategory(Category category)
 		{
-			repository.UpdateCategory(category);
-			return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+				repository.UpdateCategory(category);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
 		}
 
 		[HttpPost]

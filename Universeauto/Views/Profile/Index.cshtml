@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Product>
 
 <div class="text-center">
-    @Html.Partial("Pages",Model);
+    @Html.Partial("Pages",Model)
 </div>
-<form method="post">
-    <div>
-        <label>Number</label>
+<form method="post" class="text-center">
+    <div class="col-6">
+        <label>Количество объектов в базе</label>
         <input class="form-control" name="count" value="50" />
     </div>
-    <div>
+    <div class="col-6">
         <button type="submit" asp-action="CreateSeedData" class="btn btn-primary"><i class="fa fa-plus"></i></button>
         <button type="submit" asp-action="ClearData" class="btn btn-danger">
             <i class="fa fa-trash"></i>

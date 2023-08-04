@@ -1,23 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Universeauto.Models;
+using Universeauto.Models.Pages;
 
 namespace Universeauto.Controllers
 {
     public class ProfileController : Controller
     {
         private DataContext context;
-        public ProfileController(DataContext context)
+        private IRepository repository;
+        public ProfileController(DataContext context, IRepository repo)
         {
             this.context = context;
+            repository = repo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(QueryOptions options)
         {
 			ViewBag.TitlePage = "Заполнение данными";
 			ViewBag.Count = context.Products.Count();
-            return View(context.Products
-                .Include(p=>p.Category).OrderBy(p => p.Id).Take(20));
+            return View(repository.GetProducts(options));
         }
 
 

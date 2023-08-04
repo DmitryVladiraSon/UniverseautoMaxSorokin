@@ -1,24 +1,31 @@
 ﻿@model Category
 
-<div class="row p-2">
+<div class="container p-2 mb-1 align-items-end ">
     <div asp-validation-summary="All"></div>
-    <div class="col-1"></div>
-    <div class="col">
-        <input asp-for="Name" class="form-control" />
-    </div>
-    <div class="col">
-        <input asp-for="Description" class="form-control" />
-    </div>
-    <div class="col-3">
-        @if (Model.Id == 0)
-        {
-                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-        }
-        else
-        {
-
-            <button type="submit" class="btn btn-outline-primary"><i class="fa fa-save"></i></button>
-            <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa fa-times"></i></a>
-        }
+    <div class="row">
+        <div class="col-12 col-md-1">
+            <label asp-for="Id">#</label>
+            <input asp-for="Id" class="form-control" readonly />
+        </div>
+        <div class="col-12 col-md">
+            <label asp-for="Name">Название</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="col-12 col-md">
+            <label asp-for="Description">Описание</label>
+            <input asp-for="Description" class="form-control" />
+        </div>
+        <div class="col-12 col-md-3 mt-auto">
+            @if (Model.Id == 0)
+            {
+               
+                <button type="submit" class="btn btn-primary btn-block">Добавить <i class="fa fa-plus"></i></button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-outline-primary btn-block"><i class="fa fa-save"></i></button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-block"><i class="fa fa-times"></i></a>
+            }
+        </div>
     </div>
 </div>
