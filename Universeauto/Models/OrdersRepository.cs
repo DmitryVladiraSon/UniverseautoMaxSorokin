@@ -13,7 +13,9 @@ namespace Universeauto.Models
     .Include(o => o.Lines).ThenInclude(l => l.Product).ToArray();
         public Order GetOrder(long key) => context.Orders
             .Include(o => o.Customer)
-            .Include(o => o.Lines).First(o => o.Id == key);
+            .Include(o => o.Lines)
+            .ThenInclude(l => l.Product)
+            .First(o => o.Id == key);
 
         public void AddOrder(Order order)
         {
@@ -22,7 +24,9 @@ namespace Universeauto.Models
         }
         public void UpdateOrder(Order order)
         {
-            context.Orders.Update(order);
+            context.Orders.Update(order);         
+            // EF Core автоматически отслеживает изменения в сущности, полученной из контекста
+            // Нет необходимости вызывать ordersRepository.UpdateOrder(order);
             context.SaveChanges();
         }
         public void DeleteOrder(Order order)

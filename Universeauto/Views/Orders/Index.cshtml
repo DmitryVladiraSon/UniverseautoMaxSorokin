@@ -40,7 +40,7 @@
                                 <td>
                                     <form asp-action="DeleteOrder" method="post">
                                         <input type="hidden" name="Id" value="@r.Id" />
-                                        <a asp-action="EditOrder" asp-route-id="@r.Id"
+                                        <a asp-controller="Orders" asp-action="EditOrder" asp-route-orderid="@r.Id"
                                            class="btn btn-outline-primary"><i class="fa fa-pencil"></i></a>
                                         <a asp-controller="Reports" asp-action="ExportReportOrder" asp-route-id="@r.Id"
                                            class="btn btn-outline-primary">Отчет</a>

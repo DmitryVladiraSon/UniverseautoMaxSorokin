@@ -7,7 +7,7 @@ namespace Universeauto.Models
         public long Id { get; set; }
 
         [Required(ErrorMessage ="Укажите дату добавления заказа")]
-        public string DateAdded { get; set; }
+        public DateTime DateAdded { get; set; }
 
         [Required(ErrorMessage = "Укажите статус заказа")]
         public string Status { get; set; }  // заменить на emun

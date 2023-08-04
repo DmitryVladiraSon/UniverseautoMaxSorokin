@@ -2,169 +2,208 @@
 
 
 <div class="p-2 p-md-2 pt-0 pt-md-0 text-dark">
-    <form asp-controller="Orders"
-          asp-action="AddOrUpdateOrder" method="post">
+        <form asp-controller="Orders"
+              asp-action="AddOrUpdateOrder" method="post">
 
-        <div class="form-group ">
-            <label asp-for="Id">Код заказа</label>
-            <input asp-for="Id" class="form-control" readonly />
-            <span class="text-danger" asp-validation-for="Id"></span>
-        </div>
-
-        <div class="form-group border-1">
-            <label asp-for="DateAdded">Дата добавления</label>
-            <input asp-for="DateAdded" class="form-control" type="date" />
-            <span class="text-danger" asp-validation-for="DateAdded"></span>
-            <hr class="border-top">
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Status">Статус заказа</label>
-            <select asp-for="Status" class="form-control">
-                <option disabled selected>Выберите клиента</option>
-                <option selected>В очереди</option>
-                <option selected>В работе</option>
-                <option selected>Завершён</option>
-            </select>
-            <span class="text-danger" asp-validation-for="Status"></span>
-            <hr class="border-top">
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Customer">Клиент</label>
-            <select asp-for="CustomerId" class="form-control" id="cust-select">
-                @if (Model.Id == 0)
-                {
-                    <option disabled selected>Выберите клиента</option>
-                }
-                @foreach (Customer c in ViewBag.Customers)
-                {
-                    <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name @c.Id </option>
-                }
-            </select>
-            <span class="text-danger" asp-validation-for="Customer"></span>
-            <hr class="border-top">
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Car">Машина</label>
-            <select asp-for="Car" class="form-control">
-                @foreach (Customer cust in ViewBag.Customers)
-                {
-                    @*if (cust.Id == resultClickCar)
-                {*@
-                    @foreach (Car car in cust.Cars)
-                    {
-                        <option>@car.Name</option>
-                    }
-
-                    @*}*@
-
-                }
-            </select>
-            <span class="text-danger" asp-validation-for="Car"></span>
-            <hr class="border-top">
-        </div>
-        @*<option selected="@(Model.Customer?.Id == cust.Id)" value="@cust.Id">@cust.Cars</option>*@
-        <div class="form-group">
-            <label asp-for="DateStart">Дата начала</label>
-            <input asp-for="DateStart" class="form-control" type="date" />
-            <span class="text-danger" asp-validation-for="DateStart"></span>
-            <hr class="border-top">
-        </div>
-
-        <div class="form-group">
-            <label asp-for="DateFinish">Дата окончания</label>
-            <input asp-for="DateFinish" class="form-control" type="date" />
-            <span class="text-danger" asp-validation-for="DateFinish"></span>
-            <hr class="border-top">
-        </div>
-
-
-        <div>
-            
-            <div class="d-flex flex-column justify-content-center align-items-center">
-
-                <h6 class="mt-1 mb-1 p-2  bg-primary text-white text-center col-12">Выбранные услуги</h6>
-
-             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
-                Добавление новой услуги
-            </button>
+            <div class="form-group ">
+                <label asp-for="Id">Код заказа</label>
+                <input asp-for="Id" class="form-control" readonly />
+                <span class="text-danger" asp-validation-for="Id"></span>
             </div>
-        </div>
+
+            <div class="form-group border-1">
+                <label asp-for="DateAdded">Дата добавления</label>
+            <input asp-for="DateAdded" class="form-control" type="date" readonly />
+                <span class="text-danger" asp-validation-for="DateAdded"></span>
+                <hr class="border-top">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status">Статус заказа</label>
+                <select asp-for="Status" class="form-control">
+                    <option disabled selected>Выберите клиента</option>
+                    <option selected>В очереди</option>
+                    <option selected>В работе</option>
+                    <option selected>Завершён</option>
+                </select>
+                <span class="text-danger" asp-validation-for="Status"></span>
+                <hr class="border-top">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Customer">Клиент</label>
+                <select asp-for="CustomerId" class="form-control" id="cust-select">
+                    @if (Model.Id == 0)
+                    {
+                        <option disabled selected>Выберите клиента</option>
+                    }
+                    @foreach (Customer c in ViewBag.Customers)
+                    {
+                        <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name @c.Id </option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="Customer"></span>
+                <hr class="border-top">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Car">Машина</label>
+                <select asp-for="Car" class="form-control">
+                    @foreach (Customer cust in ViewBag.Customers)
+                    {
+                        @*if (cust.Id == resultClickCar)
+                    {*@
+                        @foreach (Car car in cust.Cars)
+                        {
+                            <option>@car.Name</option>
+                        }
+
+                        @*}*@
+
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="Car"></span>
+                <hr class="border-top">
+            </div>
+            @*<option selected="@(Model.Customer?.Id == cust.Id)" value="@cust.Id">@cust.Cars</option>*@
+            <div class="form-group">
+                <label asp-for="DateStart">Дата начала</label>
+                <input asp-for="DateStart" class="form-control" type="date" />
+                <span class="text-danger" asp-validation-for="DateStart"></span>
+                <hr class="border-top">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DateFinish">Дата окончания</label>
+                <input asp-for="DateFinish" class="form-control" type="date" />
+                <span class="text-danger" asp-validation-for="DateFinish"></span>
+                <hr class="border-top">
+            </div>
+
+
+            <div>
+            
+                <div class="d-flex flex-column justify-content-center align-items-center">
+
+                    <h6 class="mt-1 mb-1 p-2  bg-primary text-white text-center col-12">Выбранные услуги</h6>
+
+                 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+                    Добавление новой услуги
+                </button>
+                </div>
+            </div>
 
         
-        <table class="table ">
-            <thead>
-                <tr>
-                    <th class="col-3 font-weight-bold">Услуга</th>
-                    <th class="col-1 font-weight-bold">Количество</th>
-                    <th class="col-1 font-weight-bold">Цена</th>
-                </tr>
-           </thead>
-            <tbody id="tbody">
-                @{
-                    int counter = 0;
-                }
-                @foreach (OrderLine line in ViewBag.Lines)
-                {
-                    if (Model.Id == 0)
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th class="col-3 font-weight-bold">Услуга</th>
+                        <th class="col-1 font-weight-bold">Количество</th>
+                        <th class="col-1 font-weight-bold">Цена</th>
+                    </tr>
+               </thead>
+                <tbody id="tbody">
+                    @{
+                        int counter = 0;
+                    }
+                    @foreach (OrderLine line in ViewBag.Lines)
                     {
-                        <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
-                        <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
-                        <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
+                        if (Model.Id == 0)
+                        {
+                            <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
+                            <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
+                            <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
                        
-                        <tr>
-                            <td class="col-3">@line.Product.Name</td>
-                            <td class="col-3">@line.Product.RetailPrice</td>
-                            <td class="col-1">
-                                <input type="number" class="form-control form-control-sm"
-                                       name="lines[@counter].Quantity" value="@line.Quantity" />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="col-3">@line.Product.Name</td>
+                                <td class="col-3">@line.Product.RetailPrice</td>
+                                <td class="col-1">
+                                    <input type="number" class="form-control form-control-sm"
+                                           name="lines[@counter].Quantity" value="@line.Quantity" />
+                                </td>
+                            </tr>
+                        }
+                        else if (line.Quantity > 0)
+                        {
+                            <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
+                            <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
+                            <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
+
+                            <tr>
+                                <td class="col-3">@line.Product.Name</td>
+                                <td class="col-3">@line.Product.RetailPrice</td>    
+                                <td class="col-1">
+                                    <input type="number" class="form-control form-control-sm"
+                                           name="lines[@counter].Quantity" value="@line.Quantity" />
+                                </td>
+                            </tr>
+
+                        }
+
+                        counter++;
                     }
-                    else if (line.Quantity > 0)
-                    {
-                        <input type="hidden" name="lines[@counter].Id" value="@line.Id" />
-                        <input type="hidden" name="lines[@counter].ProductId" value="@line.ProductId" />
-                        <input type="hidden" name="lines[@counter].OrderId" value="@Model.Id" />
 
-                        <tr>
-                            <td class="col-3">@line.Product.Name</td>
-                            <td class="col-3">@line.Product.RetailPrice</td>    
-                            <td class="col-1">
-                                <input type="number" class="form-control form-control-sm"
-                                       name="lines[@counter].Quantity" value="@line.Quantity" />
-                            </td>
-                        </tr>
-
-                    }
-
-                    counter++;
-                }
-
-</tbody>
-            <tfoot>
-                <tr>
-                    <th class="text-right" colspan="2">Общая стоимость:</th>
-                    <td class="col-1">
-                        <input asp-for="CustomerPrice" class="form-control" /> <!-- Этот элемент будет показывать общую стоимость -->
-                        <span id="totalPrice">0</span> <!-- Этот элемент будет показывать общую стоимость -->
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+    </tbody>
+                <tfoot>
+                    <tr>
+                    <th class="text-right" colspan="2"><label asp-for="CustomerPrice">Общая стоимость:</label></th>
+                        <td class="col-1">
+                            <input asp-for="CustomerPrice" class="form-control"/> <!-- Этот элемент будет показывать общую стоимость -->
+                            <input asp-for="SalonPrice" class="form-control" /> <!-- Этот элемент будет показывать общую стоимость -->
+                            <span id="totalPrice">0</span> <!-- Этот элемент будет показывать общую стоимость -->
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
 
         
 
 
 
-        <div class="text-center m-2">
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-            <a asp-action="Index" class="btn btn-secondary">Отмена</a>
-        </div>
-    </form>
-</div>
+            <div class="text-center m-2">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+
+@*calculateCustomerPrice*@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Получаем ссылку на элемент tbody
+        const tbody = document.getElementById("tbody");
+
+        // Получаем все элементы <input> с именем "Quantity" внутри tbody
+        const quantityInputs = tbody.querySelectorAll("input[name^='lines['][name$='].Quantity']");
+
+        // Функция для вычисления общей стоимости
+        function calculateTotalPrice() {
+            let totalPrice = 0;
+            quantityInputs.forEach(input => {
+                const quantity = parseInt(input.value, 10); // Получаем значение количества услуг
+                const price = parseFloat(input.closest("tr").querySelector(".col-3:nth-child(2)").textContent); // Получаем стоимость услуги из соседнего элемента
+
+                if (!isNaN(quantity) && !isNaN(price)) {
+                    totalPrice += quantity * price;
+                }
+            });
+
+            // Устанавливаем значение общей стоимости в модели (предполагается, что у вас есть свойство SalonPrice в модели)
+            document.getElementById("CustomerPrice").value = totalPrice.toFixed(2);
+
+            // Добавьте эту строку, чтобы обновить скрытое поле, которое будет отправляться на сервер
+            document.querySelector('input[name="CustomerPrice"]').value = totalPrice.toFixed(2);
+        }
+
+        // Обработчик события изменения для каждого поля ввода количества услуг
+        quantityInputs.forEach(input => {
+            input.addEventListener("change", calculateTotalPrice);
+        });
+
+        // Вызываем функцию для начального вычисления общей стоимости
+        calculateTotalPrice();
+    });
+</script>
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -282,41 +321,8 @@
     }
 </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Получаем ссылку на элемент tbody
-        const tbody = document.getElementById("tbody");
 
-        // Получаем все элементы <input> с именем "Quantity" внутри tbody
-        const quantityInputs = tbody.querySelectorAll("input[name^='lines['][name$='].Quantity']");
-
-        // Функция для вычисления общей стоимости
-        function calculateTotalPrice() {
-            let totalPrice = 0;
-            quantityInputs.forEach(input => {
-                const quantity = parseInt(input.value, 10); // Получаем значение количества услуг
-                const price = parseFloat(input.closest("tr").querySelector(".col-3:nth-child(2)").textContent); // Получаем стоимость услуги из соседнего элемента
-
-                if (!isNaN(quantity) && !isNaN(price)) {
-                    totalPrice += quantity * price;
-                }
-            });
-
-            // Устанавливаем значение общей стоимости в модели (предполагается, что у вас есть свойство SalonPrice в модели)
-            document.getElementById("CustomerPrice").value = totalPrice.toFixed(2);
-        }
-
-        // Обработчик события изменения для каждого поля ввода количества услуг
-        quantityInputs.forEach(input => {
-            input.addEventListener("change", calculateTotalPrice);
-        });
-
-        // Вызываем функцию для начального вычисления общей стоимости
-        calculateTotalPrice();
-    });
-</script>
-
-
+@*calculateTotalPrice*@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Получаем ссылку на элемент tbody
@@ -338,7 +344,7 @@
             });
 
             // Обновляем текст в элементе, показывающем общую стоимость
-            document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);
+            document.getElementById("SalonPrice").textContent = totalPrice.toFixed(2);
         }
 
         // Обработчик события изменения для каждого поля ввода количества услуг

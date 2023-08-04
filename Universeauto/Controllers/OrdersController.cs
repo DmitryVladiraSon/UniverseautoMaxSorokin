@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Universeauto.Controllers
 {
 
@@ -16,16 +17,20 @@ namespace Universeauto.Controllers
         private ICustomerRepository customerRepository;
         private IOrdersRepository ordersRepository;
         private IOrderLinesRepository orderLinesRepository;
+        private DataContext context;
+
         public OrdersController(IRepository productRepo,
             IOrdersRepository ordersRepo,
             ICustomerRepository customerRepo,
-            IOrderLinesRepository orderLinesRepo
+            IOrderLinesRepository orderLinesRepo,
+            DataContext _context
             )
         {
             productRepository = productRepo;
             ordersRepository = ordersRepo;
             customerRepository = customerRepo;
             orderLinesRepository = orderLinesRepo;
+            context = _context;
         }
 
         public IActionResult Index()
@@ -36,55 +41,66 @@ namespace Universeauto.Controllers
         }// => View(ordersRepository.Orders);
 
 
-        public IActionResult EditOrder(Order order)
+        public IActionResult EditOrder(long orderId)
         {
             ViewBag.TitlePage = "Заказ";
 
-            Order order1 = order.Id == 0 ? new Order() : ordersRepository.GetOrder(order.Id);
+            Order order = orderId == 0 ? new Order() : ordersRepository.GetOrder(orderId);
 
 
             ViewBag.Customers = customerRepository.Customers;
 
             var products = productRepository.Products;
             IDictionary<long, OrderLine> linesMap
-                = order1.Lines?.ToDictionary(l => l.ProductId)
+                = order.Lines?.ToDictionary(l => l.ProductId)
                 ?? new Dictionary<long, OrderLine>();
             ViewBag.Lines = products.Select(p => linesMap.ContainsKey(p.Id)
             ? linesMap[p.Id]
             : new OrderLine { Product = p, ProductId = p.Id, Quantity = 0 });
 
 
-            return View(order1);
+            return View(order);
 
 
         }
 
 
-        [HttpPost]
+        [HttpPost]  
         public IActionResult AddOrUpdateOrder(Order order)
         {
             ViewBag.TitlePage = "Создать/Обновить заказ";
             order.Lines = order.Lines
 .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
+            
+            foreach(var line in order.Lines)
+            {
+                line.Product = productRepository.GetProduct(line.ProductId);
+            }
 
+            decimal sum = 0;
+foreach(var line in order.Lines)
+            {
+                sum +=line.Quantity * line.Product.RetailPrice ;
+            }
+            order.CustomerPrice = sum;
+            if (order.DateAdded == null)
+            {
+                order.DateAdded = DateTime.Now;
 
-            var customerPrice = orderLinesRepository.GetOrderLinesByOrder(order)
-                .Join(productRepository.Products,
-                    line => line.ProductId,
-                    product => product.Id,
-                    (line, product) => line.Quantity * (product.RetailPrice ))
-                .Sum();
-            order.CustomerPrice = customerPrice;
+            }
 
             //мне нужно посчитать CustomerSum
             if (order.Id == 0)
             {
-                ordersRepository.AddOrder(order);
+                    ordersRepository.AddOrder(order);
             }
             else
             {
                 ordersRepository.UpdateOrder(order);
             }
+
+            context.SaveChanges();
+
             return RedirectToAction("Index");
 
 
@@ -106,7 +122,7 @@ namespace Universeauto.Controllers
 
             ordersRepository.UpdateOrder(order);
 
-            return RedirectToAction(nameof(EditOrder), order);
+            return RedirectToAction(nameof(EditOrder), new {  orderId = order.Id});
         }
 
     }

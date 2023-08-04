@@ -1,51 +1,58 @@
 ﻿@model IEnumerable<Product>
 
+
 <div class="text-center">
     @Html.Partial("Pages",Model)
+    @{
+        ViewBag.searches = new string[] { "Name","Category.Name"};
+        ViewBag.sorts = new string[] {"Name","Category.Name",
+    "PurchasePrice","RetailPrice" };
+    }
+    @Html.Partial("PageOptions",Model)
 </div>
 <div class="table-responsive">
-<table class="table table-hover overflow-auto">
-    <thead>
-        <tr>
-        <th class="col-1 font-weight-bold">#</th>
-        <th class="col font-weight-bold">Название</th>
-        <th class="col font-weight-bold">Категория</th>
-        <th class="col font-weight-bold text-right">Цена</th>
-        <th class="col font-weight-bold text-right">Цена с моржой</th>
-        <th class="col "></th>
-        <th class="col "></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Product p in Model)
-        {
+    <table class="table table-hover overflow-auto">
+        <thead>
             <tr>
-                <th class="col-1">@p.Id</th>
-                <td class="col">@p.Name</td>
-                <td class="col">@p.Category.Name</td>
-                <td class="col text-right">@p.PurchasePrice</td>
-                <td class="col text-right">@p.RetailPrice</td>
-           
+                <th class="col-1 font-weight-bold">#</th>
+                <th class="col font-weight-bold">Название</th>
+                <th class="col font-weight-bold">Категория</th>
+                <th class="col font-weight-bold text-right">Цена</th>
+                <th class="col font-weight-bold text-right">Цена с моржой</th>
+                <th class="col "></th>
+                <th class="col "></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product p in Model)
+            {
+                <tr>
+                    <th class="col-1">@p.Id</th>
+                    <td class="col">@p.Name</td>
+                    <td class="col">@p.Category.Name</td>
+                    <td class="col text-right">@p.PurchasePrice</td>
+                    <td class="col text-right">@p.RetailPrice</td>
 
-                <form asp-action="Delete" metdod="post">
+
+                    <form asp-action="Delete" metdod="post">
                     <td class="col fs-6">
                         <a asp-action="UpdateProduct" asp-route-key="@p.Id" class="btn btn-outline-primary ">
                             <i class="fa fa-pencil"></i>
                         </a>
                         <input type="hidden" name="Id" value="@p.Id" />
-                </td>
+                    </td>
 
-                <td class="col fs-6">
+                    <td class="col fs-6">
 
                         <button type="submit" class="btn btn-outline-danger ">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>
-                </form>
-            </tr>
-        }
-    </tbody>
-</table>
+                    </form>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div class="text-center p-2">
     <a asp-action="UpdateProduct" asp-route-key="0"
