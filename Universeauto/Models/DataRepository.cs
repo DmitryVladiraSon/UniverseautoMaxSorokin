@@ -11,6 +11,11 @@ namespace Universeauto.Models
         public IEnumerable<Product> Products => context.Products
             .Include(p => p.Category).ToArray();
 
+        public PagedList<Product> GetProducts(QueryOptions options)
+        {
+            return new PagedList<Product>(context.Products.Include(p => p.Category), options);
+        }
+
         public Product GetProduct(long key) => context.Products
             .Include(p => p.Category).First(p => p.Id == key);
 
@@ -57,10 +62,6 @@ namespace Universeauto.Models
             context.SaveChanges();
         }
 
-        public PagedList<Product> GetProducts(QueryOptions options)
-        {
-            return new PagedList<Product>(context.Products
-                .Include(p => p.Category), options);
-        }
+
     }
 }
