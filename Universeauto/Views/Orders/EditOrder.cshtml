@@ -39,7 +39,7 @@
                     }
                     @foreach (Customer c in ViewBag.Customers)
                     {
-                        <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name @c.Id </option>
+                        <option selected="@(Model.Customer?.Id == c.Id)" data-car-id="@c.Id" value="@c.Id">@c.Name</option>
                     }
                 </select>
                 <span class="text-danger" asp-validation-for="Customer"></span>
@@ -146,11 +146,11 @@
     </tbody>
                 <tfoot>
                     <tr>
-                    <th class="text-right" colspan="2"><label asp-for="CustomerPrice">Общая стоимость:</label></th>
-                        <td class="col-1">
-                            <input asp-for="CustomerPrice" class="form-control"/> <!-- Этот элемент будет показывать общую стоимость -->
-                            <input asp-for="SalonPrice" class="form-control" /> <!-- Этот элемент будет показывать общую стоимость -->
-                            <span id="totalPrice">0</span> <!-- Этот элемент будет показывать общую стоимость -->
+                    <th class="text-left"><label asp-for="CustomerPrice">Общая стоимость:</label></th>
+                    <td class="col-1  text-right" colspan="2">
+                            <input asp-for="CustomerPrice" class="form-control text-right" readonly/> <!-- Этот элемент будет показывать общую стоимость -->
+                            <input type="hidden" asp-for="SalonPrice" class="form-control" /> <!-- Этот элемент будет показывать общую стоимость -->
+                            @*<span  id="totalPrice">0</span> <!-- Этот элемент будет показывать общую стоимость -->*@
                         </td>
                     </tr>
                 </tfoot>

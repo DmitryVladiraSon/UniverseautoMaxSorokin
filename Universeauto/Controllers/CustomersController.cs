@@ -42,7 +42,7 @@ namespace Universeauto.Controllers
                     custRepository.UpdateCustomer(customer);
                 }
             }
-            return RedirectToAction(nameof(EditCustomer),customer);
+            return RedirectToAction(nameof(EditCustomer), customer);
         }
 
         //[HttpPost]
@@ -52,15 +52,18 @@ namespace Universeauto.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        public IActionResult EditCustomer(Customer customer)
+        public IActionResult EditCustomer(long id)
         {
             ViewBag.TitlePage = "Клиент";
 
+            Customer customer = id == 0 
+                ? new Customer() 
+                : custRepository.GetCustomer(id);
             if (ModelState.IsValid)
             {
                 var cars = carRepository.Cars;
 
-               // customer = id == 0 ? new Customer() : custRepository.GetCustomer(id);
+                // customer = id == 0 ? new Customer() : custRepository.GetCustomer(id);
 
                 //IDictionary<long?, List<Car>> customerCars
                 //    = customer.Cars?.ToDictionary(car => car.CustomerId)

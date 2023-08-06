@@ -8,5 +8,7 @@
         void AddCustomer(Customer customer);
         void UpdateCustomer(Customer customer);
         void DeleteCustomer(Customer customer);
+
+        List<Customer> SearchCustomersByName(string searchQuery);
     }
 }

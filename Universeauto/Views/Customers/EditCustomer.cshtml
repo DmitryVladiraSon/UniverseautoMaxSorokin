@@ -34,39 +34,37 @@
     </div>
 
     <h6 class="mt-1 p-2 bg-primary text-white text-center">Машины клиента</h6>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">ГосНомер</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (ViewBag.Cars == null || ViewBag.Cars.Count == 0)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        У клиента нет машин
-                    </td>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">ГосНомер</th>
                 </tr>
-            }
-            else
-            {
-                foreach (Car car in CustomerCars)
+            </thead>
+            <tbody>
+                @if (ViewBag.Cars == null || ViewBag.Cars.Count == 0)
                 {
-
                     <tr>
-                        <th scope="row"><a href="@Url.Action("Test","Cars")"> @car.Id</a></th>
-                        <td class="col">@car.Name</td>
-                        <td class="col">@car.GovNomber</td>
+                        <td>
+                            У клиента нет машин
+                        </td>
                     </tr>
-
                 }
-            }
+                else
+                {
+                    foreach (Car car in CustomerCars)
+                    {
+                        <tr>
+                        <th class="col-3" scope="row"><a href="@Url.Action("Test","Cars")"> @car.Id</a></th>
+                        <td class="col">@car.Name</td>
+                            <td class="col-3">@car.GovNomber</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
 
-        </tbody>
-    </table>
     <div class="text-center m-2">
         <button type="submit" class="btn btn-primary">Сохранить</button>
         <a asp-action="Index" class="btn btn-secondary">Отмена</a>

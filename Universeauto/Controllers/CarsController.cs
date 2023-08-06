@@ -65,7 +65,7 @@ namespace Universeauto.Controllers
 		{
 			ViewBag.EditId = car.Id;
 			ViewBag.Customers = customerRepository.Customers;
-            ViewBag.TitlePage = "Редактировать машину";
+            ViewBag.TitlePage = "Редактирование";
 
             ViewBag.AutoClasses = new List<AutoClass>
     {
@@ -105,5 +105,15 @@ namespace Universeauto.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-	}
+        [HttpGet]
+        public IActionResult GetCustomers(string searchTerm)
+        {
+            // Здесь выполните логику для поиска Customers по введенному searchTerm
+            // Например, получите результаты из базы данных или из другого источника данных
+            var customers = customerRepository.SearchCustomersByName(searchTerm);
+
+            return Json(customers); // Возвращаем результаты в формате JSON
+        }
+
+    }
 }
