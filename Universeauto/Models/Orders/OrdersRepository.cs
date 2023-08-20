@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Orders
 {
 
     public class OrdersRepository : IOrdersRepository
@@ -24,7 +24,7 @@ namespace Universeauto.Models
         }
         public void UpdateOrder(Order order)
         {
-            context.Orders.Update(order);         
+            context.Orders.Update(order);
             // EF Core автоматически отслеживает изменения в сущности, полученной из контекста
             // Нет необходимости вызывать ordersRepository.UpdateOrder(order);
             context.SaveChanges();

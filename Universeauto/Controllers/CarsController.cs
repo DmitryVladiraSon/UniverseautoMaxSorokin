@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Universeauto.Models;
+using Universeauto.Models.Cars;
+using Universeauto.Models.Customers;
 
 namespace Universeauto.Controllers
 {
-	public class CarsController : Controller
+    public class CarsController : Controller
 	{
 		private ICarRepository carRepository;
 		private ICustomerRepository customerRepository;

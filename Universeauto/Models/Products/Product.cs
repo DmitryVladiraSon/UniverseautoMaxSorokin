@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Universeauto.Models.Categories;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Products
 {
     public class Product
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Cars
 {
 
     public class CarRepository : ICarRepository

@@ -1,6 +1,7 @@
-﻿using Universeauto.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Universeauto.Models.Cars;
+using Universeauto.Models.Customers;
 
 namespace Universeauto.Controllers
 {

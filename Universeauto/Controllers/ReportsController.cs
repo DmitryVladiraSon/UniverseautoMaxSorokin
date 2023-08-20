@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using Universeauto.Models;
+using Universeauto.Models.Orders;
+using Universeauto.Models.Orders.OrderLines;
 
 namespace Universeauto.Controllers
 {

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Universeauto.Models.Customers;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Cars
 {
     public class Car
     {

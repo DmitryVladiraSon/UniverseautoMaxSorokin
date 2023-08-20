@@ -6,20 +6,23 @@ using Universeauto.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-
+using Universeauto.Models.Products;
+using Universeauto.Models.Customers;
+using Universeauto.Models.Orders;
+using Universeauto.Models.Orders.OrderLines;
 
 namespace Universeauto.Controllers
 {
 
     public class OrdersController : Controller
     {
-        private IRepository productRepository;
+        private IRroductRepository productRepository;
         private ICustomerRepository customerRepository;
         private IOrdersRepository ordersRepository;
         private IOrderLinesRepository orderLinesRepository;
         private DataContext context;
 
-        public OrdersController(IRepository productRepo,
+        public OrdersController(IRroductRepository productRepo,
             IOrdersRepository ordersRepo,
             ICustomerRepository customerRepo,
             IOrderLinesRepository orderLinesRepo,

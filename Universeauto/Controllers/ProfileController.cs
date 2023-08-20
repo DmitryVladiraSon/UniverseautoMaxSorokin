@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Universeauto.Models;
+using Universeauto.Models.Categories;
 using Universeauto.Models.Pages;
+using Universeauto.Models.Products;
 
 namespace Universeauto.Controllers
 {
     public class ProfileController : Controller
     {
         private DataContext context;
-        private IRepository repository;
-        public ProfileController(DataContext context, IRepository repo)
+        private IRroductRepository repository;
+        public ProfileController(DataContext context, IRroductRepository repo)
         {
             this.context = context;
             repository = repo;

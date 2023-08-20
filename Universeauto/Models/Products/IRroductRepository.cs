@@ -1,8 +1,8 @@
 ﻿using Universeauto.Models.Pages;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Products
 {
-    public interface IRepository
+    public interface IRroductRepository
     {
         IEnumerable<Product> Products { get; }
         PagedList<Product> GetProducts(QueryOptions options);

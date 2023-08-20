@@ -1,4 +1,4 @@
-﻿namespace Universeauto.Models
+﻿namespace Universeauto.Models.Categories
 {
     public interface ICategoryRepository
     {

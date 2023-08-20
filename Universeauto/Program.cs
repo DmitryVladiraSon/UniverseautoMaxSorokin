@@ -1,6 +1,12 @@
 using Universeauto.Models;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
+using Universeauto.Models.Products;
+using Universeauto.Models.Cars;
+using Universeauto.Models.Categories;
+using Universeauto.Models.Customers;
+using Universeauto.Models.Orders;
+using Universeauto.Models.Orders.OrderLines;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +16,7 @@ var configuration = new ConfigurationBuilder()
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 //builder.Services.AddMvc();
-builder.Services.AddTransient<IRepository, DataRepository>();
+builder.Services.AddTransient<IRroductRepository, ProductRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();

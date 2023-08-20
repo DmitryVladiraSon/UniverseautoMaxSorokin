@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Universeauto.Models;
+using Universeauto.Models.Cars;
+using Universeauto.Models.Categories;
+using Universeauto.Models.Customers;
+using Universeauto.Models.Orders;
+using Universeauto.Models.Orders.OrderLines;
+using Universeauto.Models.Products;
 
 namespace Universeauto.Models
 {

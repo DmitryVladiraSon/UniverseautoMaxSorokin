@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Universeauto.Models.Cars;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Customers
 {
     public class Customer
     {
         public long Id { get; set; }
-        
+
         [Required(ErrorMessage = "Введите имя")]
         public string Name { get; set; }
 
@@ -16,7 +17,7 @@ namespace Universeauto.Models
         [EmailAddress]
         public string Email { get; set; }
 
-     public ICollection<Car>? Cars { get; set; }
+        public ICollection<Car>? Cars { get; set; }
 
     }
 }

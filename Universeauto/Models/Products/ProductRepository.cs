@@ -2,12 +2,12 @@
 using System.Security.Cryptography.X509Certificates;
 using Universeauto.Models.Pages;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Products
 {
-    public class DataRepository : IRepository
+    public class ProductRepository : IRroductRepository
     {
         private DataContext context;
-        public DataRepository(DataContext dataContext) => context = dataContext;
+        public ProductRepository(DataContext dataContext) => context = dataContext;
         public IEnumerable<Product> Products => context.Products
             .Include(p => p.Category).ToArray();
 

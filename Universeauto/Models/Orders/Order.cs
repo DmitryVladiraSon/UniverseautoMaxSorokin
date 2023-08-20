@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Universeauto.Models.Customers;
+using Universeauto.Models.Orders.OrderLines;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Orders
 {
     public class Order
     {
         public long Id { get; set; }
 
-        [Required(ErrorMessage ="Укажите дату добавления заказа")]
+        [Required(ErrorMessage = "Укажите дату добавления заказа")]
         public DateTime DateAdded { get; set; }
 
         [Required(ErrorMessage = "Укажите статус заказа")]
@@ -16,7 +18,7 @@ namespace Universeauto.Models
         public long CustomerId { get; set; }
         public Customer? Customer { get; set; }
 
-        [Required(ErrorMessage ="Укажите машину для заказа")]
+        [Required(ErrorMessage = "Укажите машину для заказа")]
         public string Car { get; set; } // создать отдельный класс
 
         [Required(ErrorMessage = "Укажите дату начала")]

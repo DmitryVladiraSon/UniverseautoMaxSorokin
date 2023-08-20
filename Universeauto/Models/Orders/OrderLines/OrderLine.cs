@@ -1,4 +1,6 @@
-﻿namespace Universeauto.Models
+﻿using Universeauto.Models.Products;
+
+namespace Universeauto.Models.Orders.OrderLines
 {
     public class OrderLine
     {

@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Universeauto.Models;
+using Universeauto.Models.Categories;
 using Universeauto.Models.Pages;
+using Universeauto.Models.Products;
 
 namespace Universeauto.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository repository;
+        private IRroductRepository repository;
         private ICategoryRepository catRepository;
-        public HomeController(IRepository repo, ICategoryRepository catRepo)
+        public HomeController(IRroductRepository repo, ICategoryRepository catRepo)
         {
             repository = repo;
             catRepository = catRepo;

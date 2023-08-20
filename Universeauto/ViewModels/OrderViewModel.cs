@@ -1,4 +1,6 @@
-﻿using Universeauto.Models;
+﻿using Universeauto.Models.Customers;
+using Universeauto.Models.Orders;
+using Universeauto.Models.Orders.OrderLines;
 
 namespace Universeauto.ViewModels
 {

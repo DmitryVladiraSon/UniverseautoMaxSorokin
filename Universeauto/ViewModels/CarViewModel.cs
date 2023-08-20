@@ -1,4 +1,5 @@
-﻿using Universeauto.Models;
+﻿using Universeauto.Models.Cars;
+using Universeauto.Models.Customers;
 using Universeauto.Models.Pages;
 
 namespace Universeauto.ViewModels

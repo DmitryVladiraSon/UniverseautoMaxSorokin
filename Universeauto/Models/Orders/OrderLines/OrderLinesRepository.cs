@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Universeauto.Models
+namespace Universeauto.Models.Orders.OrderLines
 {
     public class OrderLinesRepository : IOrderLinesRepository
     {
         private DataContext _context;
-        public OrderLinesRepository( DataContext context) {
+        public OrderLinesRepository(DataContext context)
+        {
             _context = context;
         }
         public IEnumerable<OrderLine> GetOrderLines()

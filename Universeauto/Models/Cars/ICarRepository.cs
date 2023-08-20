@@ -1,4 +1,4 @@
-﻿namespace Universeauto.Models
+﻿namespace Universeauto.Models.Cars
 {
     public interface ICarRepository
     {

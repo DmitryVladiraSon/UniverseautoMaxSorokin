@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Universeauto.Models;
+using Universeauto.Models.Categories;
 
 namespace Universeauto.Controllers
 {
-	public class CategoriesController : Controller
+    public class CategoriesController : Controller
 	{
 		private ICategoryRepository repository;
 
