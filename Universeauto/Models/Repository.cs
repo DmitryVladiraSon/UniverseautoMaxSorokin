@@ -9,9 +9,14 @@ namespace Universeauto.Models
 		{
 			_dbContext = dbContext;
 		}
-		public void AddElement(TEntity entity)
+		public void Add(TEntity entity)
 		{
 			_dbContext.Set<TEntity>().Add(entity);
+			_dbContext.SaveChanges();
+		}
+		public void Update(TEntity entity)
+		{
+			_dbContext.Set<TEntity>().Update(entity);
 			_dbContext.SaveChanges();
 		}
 
@@ -21,10 +26,6 @@ namespace Universeauto.Models
 			_dbContext.SaveChanges();
 		}
 
-		public void UpdateElement(TEntity entity)
-		{
-			_dbContext.Set<TEntity>().Update(entity);
-			_dbContext.SaveChanges();
-		}
+
 	}
 }

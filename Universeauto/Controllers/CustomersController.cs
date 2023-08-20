@@ -36,11 +36,11 @@ namespace Universeauto.Controllers
 
                 if (customer.Id == 0)
                 {
-                    custRepository.AddCustomer(customer);
+                    custRepository.Add(customer);
                 }
                 else
                 {
-                    custRepository.UpdateCustomer(customer);
+                    custRepository.Update(customer);
                 }
             }
             return RedirectToAction(nameof(EditCustomer), customer);
@@ -136,12 +136,12 @@ namespace Universeauto.Controllers
 
                 if (customer.Id == 0)
                 {
-                    custRepository.AddCustomer(customer);
+                    custRepository.Add(customer);
 
                 }
                 else
                 {
-                    custRepository.UpdateCustomer(customer);
+                    custRepository.Update(customer);
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -149,7 +149,7 @@ namespace Universeauto.Controllers
         [HttpPost]
         public IActionResult DeleteCustomer(Customer customer)
         {
-            custRepository.DeleteCustomer(customer);
+            custRepository.Delete(customer);
             return RedirectToAction(nameof(Index));
         }
     }

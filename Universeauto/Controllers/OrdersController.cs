@@ -95,11 +95,11 @@ foreach(var line in order.Lines)
             //мне нужно посчитать CustomerSum
             if (order.Id == 0)
             {
-                    ordersRepository.AddOrder(order);
+                    ordersRepository.Add(order);
             }
             else
             {
-                ordersRepository.UpdateOrder(order);
+                ordersRepository.Update(order);
             }
 
             context.SaveChanges();
@@ -113,7 +113,7 @@ foreach(var line in order.Lines)
         [HttpPost]
         public IActionResult DeleteOrder(Order order)
         {
-            ordersRepository.DeleteOrder(order);
+            ordersRepository.Delete(order);
             return RedirectToAction(nameof(Index));
         }
 
@@ -123,7 +123,7 @@ foreach(var line in order.Lines)
             order.Lines = order.Lines
     .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
 
-            ordersRepository.UpdateOrder(order);
+            ordersRepository.Update(order);
 
             return RedirectToAction(nameof(EditOrder), new {  orderId = order.Id});
         }

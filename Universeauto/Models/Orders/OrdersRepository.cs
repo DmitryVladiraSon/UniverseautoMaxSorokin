@@ -3,12 +3,12 @@
 namespace Universeauto.Models.Orders
 {
 
-    public class OrdersRepository : IOrdersRepository
+    public class OrdersRepository : Repository<Order>, IOrdersRepository
     {
         private DataContext context;
 
 
-        public OrdersRepository(DataContext cxt) => context = cxt;
+        public OrdersRepository(DataContext cxt) : base(cxt) => context = cxt;
         public IEnumerable<Order> Orders => context.Orders.Include(o => o.Customer)
     .Include(o => o.Lines).ThenInclude(l => l.Product).ToArray();
         public Order GetOrder(long key) => context.Orders
@@ -16,24 +16,7 @@ namespace Universeauto.Models.Orders
             .Include(o => o.Lines)
             .ThenInclude(l => l.Product)
             .First(o => o.Id == key);
-
-        public void AddOrder(Order order)
-        {
-            context.Orders.Add(order);
-            context.SaveChanges();
-        }
-        public void UpdateOrder(Order order)
-        {
-            context.Orders.Update(order);
-            // EF Core автоматически отслеживает изменения в сущности, полученной из контекста
-            // Нет необходимости вызывать ordersRepository.UpdateOrder(order);
-            context.SaveChanges();
-        }
-        public void DeleteOrder(Order order)
-        {
-            context.Orders.Remove(order);
-            context.SaveChanges();
-        }
+    
 
         public void AddOrderLine(Order order) // Скорее всего его нужно сделать асинхронным)
         {

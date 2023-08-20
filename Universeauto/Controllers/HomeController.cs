@@ -36,11 +36,11 @@ namespace Universeauto.Controllers
             {
                 if (product.Id == 0 )
                 {
-                    prodRepository.AddElement(product);
+                    prodRepository.Add(product);
                 }
                 else
                 {
-                    prodRepository.UpdateElement(product);
+                    prodRepository.Update(product);
 
                 }
                 return RedirectToAction(nameof(Index));

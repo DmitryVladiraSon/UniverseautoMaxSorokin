@@ -22,22 +22,8 @@ namespace Universeauto.Models.Products
         public Product GetProduct(long key) => context.Products
             .Include(p => p.Category).First(p => p.Id == key);
 
-        //public void UpdateProduct(Product product)
-        //{
-        //    Product p = context.Products.Find(product.Id);
-        //    p.Name = product.Name;
-        //    //p.Category = product.Category;
-        //    p.CategoryId = product.CategoryId;
-        //    p.PurchasePrice = product.PurchasePrice;
-        //    p.RetailPrice = product.RetailPrice;
-
-        //    //context.Products.Update(product);
-        //    context.SaveChanges();
-        //}
-
         public void UpdateAll(Product[] products)
         {
-            //context.Products.UpdateRange(products);
             Dictionary<long, Product> data = products.ToDictionary(p => p.Id);
             IEnumerable<Product> baseline =
                 context.Products.Where(p => data.Keys.Contains(p.Id));

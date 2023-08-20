@@ -21,7 +21,7 @@ namespace Universeauto.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				repository.AddCategory(category);
+				repository.Add(category);
 				return RedirectToAction(nameof(Index));
 			}
 			else
@@ -43,7 +43,7 @@ namespace Universeauto.Controllers
 		{
             if (ModelState.IsValid)
             {
-				repository.UpdateCategory(category);
+				repository.Update(category);
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -55,7 +55,7 @@ namespace Universeauto.Controllers
 		[HttpPost]
 		public IActionResult DeleteCategory(Category category)
 		{
-			repository.DeleteCategory(category);
+			repository.Delete(category);
 			return RedirectToAction(nameof(Index));
 		}
 

@@ -2,8 +2,8 @@
 {
 	public interface IRepository<TEntity> where TEntity : class
 	{
-		void AddElement(TEntity entity);
-		void UpdateElement(TEntity entity);
+		void Add(TEntity entity);
+		void Update(TEntity entity);
 		void Delete(TEntity entity);
 	}
 }

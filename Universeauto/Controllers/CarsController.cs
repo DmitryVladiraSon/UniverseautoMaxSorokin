@@ -30,7 +30,7 @@ namespace Universeauto.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				carRepository.AddCar(car);
+				carRepository.Add(car);
 				return RedirectToAction(nameof(Index));
 			}
 			return RedirectToAction(nameof(Index));
@@ -45,11 +45,11 @@ namespace Universeauto.Controllers
 
                 if (car.Id == 0)
                 {
-                    carRepository.AddCar(car);
+                    carRepository.Add(car);
                 }
                 else
                 {
-                    carRepository.UpdateCar(car);
+                    carRepository.Update(car);
                 }
                 return RedirectToAction(nameof(Index));
 
@@ -91,7 +91,7 @@ namespace Universeauto.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				carRepository.UpdateCar(car);
+				carRepository.Update(car);
 				return RedirectToAction(nameof(Index));
 			}
 			return RedirectToAction(nameof(Index));
@@ -102,7 +102,7 @@ namespace Universeauto.Controllers
 		[HttpPost]
 		public IActionResult DeleteCar(Car car)
 		{
-			carRepository.DeleteCar(car);
+			carRepository.Delete(car);
 			return RedirectToAction(nameof(Index));
 		}
 
