@@ -1,6 +1,6 @@
 ﻿namespace Universeauto.Models.Cars
 {
-    public interface ICarRepository
+    public interface ICarRepository 
     {
         IEnumerable<Car> Cars { get; }
         Car GetCar(long id);

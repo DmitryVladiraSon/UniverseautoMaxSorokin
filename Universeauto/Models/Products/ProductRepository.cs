@@ -4,11 +4,14 @@ using Universeauto.Models.Pages;
 
 namespace Universeauto.Models.Products
 {
-    public class ProductRepository : IRroductRepository
+    public class ProductRepository : Repository<Product>, IRroductRepository
     {
         private DataContext context;
-        public ProductRepository(DataContext dataContext) => context = dataContext;
-        public IEnumerable<Product> Products => context.Products
+		public ProductRepository(DataContext dbContext) : base(dbContext)
+		{
+            context = dbContext;
+		}
+		public IEnumerable<Product> Products => context.Products
             .Include(p => p.Category).ToArray();
 
         public PagedList<Product> GetProducts(QueryOptions options)
@@ -19,23 +22,18 @@ namespace Universeauto.Models.Products
         public Product GetProduct(long key) => context.Products
             .Include(p => p.Category).First(p => p.Id == key);
 
-        public void AddProduct(Product product)
-        {
-            context.Products.Add(product);
-            context.SaveChanges();
-        }
-        public void UpdateProduct(Product product)
-        {
-            Product p = context.Products.Find(product.Id);
-            p.Name = product.Name;
-            //p.Category = product.Category;
-            p.CategoryId = product.CategoryId;
-            p.PurchasePrice = product.PurchasePrice;
-            p.RetailPrice = product.RetailPrice;
+        //public void UpdateProduct(Product product)
+        //{
+        //    Product p = context.Products.Find(product.Id);
+        //    p.Name = product.Name;
+        //    //p.Category = product.Category;
+        //    p.CategoryId = product.CategoryId;
+        //    p.PurchasePrice = product.PurchasePrice;
+        //    p.RetailPrice = product.RetailPrice;
 
-            //context.Products.Update(product);
-            context.SaveChanges();
-        }
+        //    //context.Products.Update(product);
+        //    context.SaveChanges();
+        //}
 
         public void UpdateAll(Product[] products)
         {
@@ -55,13 +53,5 @@ namespace Universeauto.Models.Products
 
             context.SaveChanges();
         }
-
-        public void Delete(Product product)
-        {
-            context.Products.Remove(product);
-            context.SaveChanges();
-        }
-
-
     }
 }

@@ -2,17 +2,12 @@
 
 namespace Universeauto.Models.Products
 {
-    public interface IRroductRepository
+    public interface IRroductRepository : IRepository<Product>
     {
         IEnumerable<Product> Products { get; }
         PagedList<Product> GetProducts(QueryOptions options);
         Product GetProduct(long key);
-        void AddProduct(Product product);
-
-        void UpdateProduct(Product product);
         void UpdateAll(Product[] products);
-
-        void Delete(Product product);
 
     }
 }

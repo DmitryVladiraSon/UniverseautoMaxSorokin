@@ -7,27 +7,26 @@ namespace Universeauto.Controllers
 {
     public class HomeController : Controller
     {
-        private IRroductRepository repository;
+        private IRroductRepository prodRepository;
         private ICategoryRepository catRepository;
         public HomeController(IRroductRepository repo, ICategoryRepository catRepo)
         {
-            repository = repo;
+            prodRepository = repo;
             catRepository = catRepo;
         }
         
         public IActionResult Index(QueryOptions options)
         {
-           
             ViewBag.TitlePage = "Услуги";
             ViewBag.Options = options;
-            return View(repository.GetProducts(options)); //as IQueryable<Product>
+            return View(prodRepository.GetProducts(options)); //as IQueryable<Product>
         }
 
         public IActionResult UpdateProduct(long key)
         {
             ViewBag.Categories = catRepository.Categories;
             ViewBag.TitlePage = "Обновить услугу";
-            return View(key == 0 ? new Product() : repository.GetProduct(key));
+            return View(key == 0 ? new Product() : prodRepository.GetProduct(key));
         }
 
         [HttpPost]
@@ -37,11 +36,11 @@ namespace Universeauto.Controllers
             {
                 if (product.Id == 0 )
                 {
-                    repository.AddProduct(product);
+                    prodRepository.AddElement(product);
                 }
                 else
                 {
-                    repository.UpdateProduct(product);
+                    prodRepository.UpdateElement(product);
 
                 }
                 return RedirectToAction(nameof(Index));
@@ -55,7 +54,7 @@ namespace Universeauto.Controllers
         [HttpPost]
         public IActionResult Delete(Product product)
         {
-            repository.Delete(product);
+            prodRepository.Delete(product);
             return RedirectToAction(nameof(Index));
         }
     }
