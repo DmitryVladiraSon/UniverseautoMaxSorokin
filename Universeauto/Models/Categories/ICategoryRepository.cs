@@ -1,6 +1,6 @@
 ﻿namespace Universeauto.Models.Categories
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository :IRepository<Category>
     {
         IEnumerable<Category> Categories { get; }
 

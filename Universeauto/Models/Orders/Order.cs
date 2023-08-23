@@ -7,9 +7,8 @@ namespace Universeauto.Models.Orders
     public class Order
     {
         public long Id { get; set; }
-
-        [Required(ErrorMessage = "Укажите дату добавления заказа")]
-        public DateTime DateAdded { get; set; }
+        
+        public DateTime DateAdded { get; private set; }
 
         [Required(ErrorMessage = "Укажите статус заказа")]
         public string Status { get; set; }  // заменить на emun
@@ -33,5 +32,10 @@ namespace Universeauto.Models.Orders
         [Required(ErrorMessage = "Укажите хотя бы одну строку заказа")]
 
         public IEnumerable<OrderLine> Lines { get; set; }
+
+        public Order()
+        {
+            DateAdded = DateTime.Now;
+        }
     }
 }

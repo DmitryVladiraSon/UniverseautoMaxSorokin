@@ -13,7 +13,6 @@ using Universeauto.Models.Orders.OrderLines;
 
 namespace Universeauto.Controllers
 {
-
     public class OrdersController : Controller
     {
         private IRroductRepository productRepository;
@@ -27,7 +26,7 @@ namespace Universeauto.Controllers
             ICustomerRepository customerRepo,
             IOrderLinesRepository orderLinesRepo,
             DataContext _context
-            )
+        )
         {
             productRepository = productRepo;
             ordersRepository = ordersRepo;
@@ -41,7 +40,7 @@ namespace Universeauto.Controllers
             ViewBag.TitlePage = "Заказы";
             var orders = ordersRepository.Orders;
             return View(ordersRepository.Orders);
-        }// => View(ordersRepository.Orders);
+        } // => View(ordersRepository.Orders);
 
 
         public IActionResult EditOrder(long orderId)
@@ -56,46 +55,27 @@ namespace Universeauto.Controllers
             var products = productRepository.Products;
             IDictionary<long, OrderLine> linesMap
                 = order.Lines?.ToDictionary(l => l.ProductId)
-                ?? new Dictionary<long, OrderLine>();
+                  ?? new Dictionary<long, OrderLine>();
             ViewBag.Lines = products.Select(p => linesMap.ContainsKey(p.Id)
-            ? linesMap[p.Id]
-            : new OrderLine { Product = p, ProductId = p.Id, Quantity = 0 });
+                ? linesMap[p.Id]
+                : new OrderLine { Product = p, ProductId = p.Id, Quantity = 0 });
 
 
             return View(order);
-
-
         }
 
 
-        [HttpPost]  
+        [HttpPost]
         public IActionResult AddOrUpdateOrder(Order order)
         {
             ViewBag.TitlePage = "Создать/Обновить заказ";
-            order.Lines = order.Lines
-.Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
-            
-            foreach(var line in order.Lines)
-            {
-                line.Product = productRepository.GetProduct(line.ProductId);
-            }
 
-            decimal sum = 0;
-foreach(var line in order.Lines)
-            {
-                sum +=line.Quantity * line.Product.RetailPrice ;
-            }
-            order.CustomerPrice = sum;
-            if (order.DateAdded == null)
-            {
-                order.DateAdded = DateTime.Now;
+                order.Lines = order.Lines
+                    .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
 
-            }
-
-            //мне нужно посчитать CustomerSum
             if (order.Id == 0)
             {
-                    ordersRepository.Add(order);
+                ordersRepository.Add(order);
             }
             else
             {
@@ -105,8 +85,6 @@ foreach(var line in order.Lines)
             context.SaveChanges();
 
             return RedirectToAction("Index");
-
-
         }
 
 
@@ -121,12 +99,11 @@ foreach(var line in order.Lines)
         public IActionResult AddOrderLine(Order order)
         {
             order.Lines = order.Lines
-    .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
+                .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
 
             ordersRepository.Update(order);
 
-            return RedirectToAction(nameof(EditOrder), new {  orderId = order.Id});
+            return RedirectToAction(nameof(EditOrder), new { orderId = order.Id });
         }
-
     }
 }

@@ -23,8 +23,8 @@
                 <select asp-for="Status" class="form-control">
                     <option disabled selected>Выберите клиента</option>
                     <option selected>В очереди</option>
-                    <option selected>В работе</option>
-                    <option selected>Завершён</option>
+                    <option >В работе</option>
+                    <option >Завершён</option>
                 </select>
                 <span class="text-danger" asp-validation-for="Status"></span>
                 <hr class="border-top">
@@ -150,7 +150,7 @@
                     <td class="col-1  text-right" colspan="2">
                             <input asp-for="CustomerPrice" class="form-control text-right" readonly/> <!-- Этот элемент будет показывать общую стоимость -->
                             <input type="hidden" asp-for="SalonPrice" class="form-control" /> <!-- Этот элемент будет показывать общую стоимость -->
-                            @*<span  id="totalPrice">0</span> <!-- Этот элемент будет показывать общую стоимость -->*@
+                            
                         </td>
                     </tr>
                 </tfoot>
@@ -178,21 +178,23 @@
 
         // Функция для вычисления общей стоимости
         function calculateTotalPrice() {
-            let totalPrice = 0;
-            quantityInputs.forEach(input => {
-                const quantity = parseInt(input.value, 10); // Получаем значение количества услуг
-                const price = parseFloat(input.closest("tr").querySelector(".col-3:nth-child(2)").textContent); // Получаем стоимость услуги из соседнего элемента
+let totalPrice = 0;
+    quantityInputs.forEach(input => {
+        const quantity = parseInt(input.value, 10);
+        const priceText = input.closest("tr").querySelector(".col-3:nth-child(2)").textContent;
+        const price = parseFloat(priceText.replace(",", "."));
 
-                if (!isNaN(quantity) && !isNaN(price)) {
-                    totalPrice += quantity * price;
-                }
-            });
+        if (!isNaN(quantity) && !isNaN(price)) {
+            totalPrice += quantity * price;
+        }
+    });
 
-            // Устанавливаем значение общей стоимости в модели (предполагается, что у вас есть свойство SalonPrice в модели)
-            document.getElementById("CustomerPrice").value = totalPrice.toFixed(2);
+    const formattedTotalPrice = totalPrice.toFixed(2).replace(".", ","); // Заменяем точку на запятую
+    console.log("Customer Price:", formattedTotalPrice);
 
-            // Добавьте эту строку, чтобы обновить скрытое поле, которое будет отправляться на сервер
-            document.querySelector('input[name="CustomerPrice"]').value = totalPrice.toFixed(2);
+    document.getElementById("CustomerPrice").value = formattedTotalPrice;
+    document.querySelector('input[name="CustomerPrice"]').value = formattedTotalPrice;
+
         }
 
         // Обработчик события изменения для каждого поля ввода количества услуг
@@ -200,8 +202,10 @@
             input.addEventListener("change", calculateTotalPrice);
         });
 
-        // Вызываем функцию для начального вычисления общей стоимости
-        calculateTotalPrice();
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        calculateTotalPrice(); // Вызываем функцию для обновления SalonPrice перед отправкой
+    });
     });
 </script>
 
