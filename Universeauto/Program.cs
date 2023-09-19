@@ -26,7 +26,7 @@ builder.Services.AddTransient<IOrderLinesRepository, OrderLinesRepository>();
 
 //var connectionString = Configuration.GetConnectionString("DefaultConnection");
 var connectionString = configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DataContext>(options => options.UseMySQL(connectionString));
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
 
 //builder.Services.AddSingleton<IRepository, DataRepository>();

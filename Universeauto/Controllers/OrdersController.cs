@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Org.BouncyCastle.Asn1.X509;
 using Universeauto.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -47,7 +45,7 @@ namespace Universeauto.Controllers
         {
             ViewBag.TitlePage = "Заказ";
 
-            Order order = orderId == 0 ? new Order() : ordersRepository.GetOrder(orderId);
+            var order = orderId == 0 ? new Order() : ordersRepository.GetOrder(orderId);
 
 
             ViewBag.Customers = customerRepository.Customers;
@@ -70,8 +68,8 @@ namespace Universeauto.Controllers
         {
             ViewBag.TitlePage = "Создать/Обновить заказ";
 
-                order.Lines = order.Lines
-                    .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
+            order.Lines = order.Lines
+                .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
 
             if (order.Id == 0)
             {
@@ -81,8 +79,6 @@ namespace Universeauto.Controllers
             {
                 ordersRepository.Update(order);
             }
-
-            context.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -99,11 +95,11 @@ namespace Universeauto.Controllers
         public IActionResult AddOrderLine(Order order)
         {
             order.Lines = order.Lines
-                .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
+                .Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToList();
 
             ordersRepository.Update(order);
 
-            return RedirectToAction(nameof(EditOrder), new { orderId = order.Id });
+            return RedirectToAction(nameof(EditOrder), order);
         }
     }
 }
